@@ -33,7 +33,7 @@ dotenv.config({
 const connectDB = async () => {
   try {
     const connectionInstance = await mongoose.connect(
-      "mongodb+srv://chopraakanksha10:Akankshamongo1212@cluster0.3wtem9z.mongodb.net/auction?retryWrites=true&w=majority&appName=Cluster0", // Fallback for local DB if the URI isn't set
+      "mongodb+srv://chopraakanksha10:Akankshamongo1212@cluster0.3wtem9z.mongodb.net/palette?retryWrites=true&w=majority&appName=Cluster0", // Fallback for local DB if the URI isn't set
       {
         useNewUrlParser: true, // Ensures MongoDB driver uses the new connection string parser
         useUnifiedTopology: true, // Ensures the MongoDB driver handles things correctly for newer versions

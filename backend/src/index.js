@@ -4,6 +4,8 @@ import connectDB from './db/index.js';
 import http from "http";
 import { Server } from "socket.io";
 import  {socketIoConnectioin}  from './socketio/socketio.js';
+import emailRoutes from "./routes/contact.routes.js"
+
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -18,11 +20,12 @@ dotenv.config({
   path:"./env"
 })
 
-// app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
+
+app.use(emailRoutes);
 
 connectDB()
 .then(
-  server.listen(process.env.PORT || 8000, () => {
+  server.listen(8000, () => {
     console.log(`server is running at port ${process.env.PORT}`)
   })
 )

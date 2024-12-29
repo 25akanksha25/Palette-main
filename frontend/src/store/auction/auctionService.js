@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "http://localhost:8000/api/v1";
 
 const createAuction = async (data) => {
-  //console.log("data..... create auction ........", data); 
+  //console.log("data..... create auction ........", data);
   try {
     const response = await axios.post(
       `${API_URL}/auctions/create-auction`,
@@ -12,16 +12,10 @@ const createAuction = async (data) => {
     );
     //console.log("response createAuction", response.data);
     return response.data;
-  // } catch (error) {
-  //   const message =
-  //     (error.response && error.response.data.message) || error.message;
-  //   //console.error("Error with createAuction", error);
-  //   return { message, isError: true };
-  // }
-  }
-  catch (error) {
-    console.error("Error creating auction:", error);
-    const message = error.response?.data?.message || error.message;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data.message) || error.message;
+    //console.error("Error with createAuction", error);
     return { message, isError: true };
   }
 };
@@ -72,92 +66,92 @@ const updateAuctionStatus = async (data) => {
   }
 };
 
-// const selectAuctionWinner = async (data) => {
-//   try {
-//     //console.log("data selectAuctionWinner", data);
-//     const response = await axios.get(
-//       `http://localhost:8000/api/v1/bids/${data.id}/winner`
-//     );
-//     //console.log("response selectAuctionWinner", response.data);
-//     return response.data;
-//   } catch (error) {
-//     const message =
-//       (error.response && error.response.data.message) || error.message;
-//     //console.error("Error with selectAuctionWinner", error);
-//     return { message, isError: true };
-//   }
-// };
+const selectAuctionWinner = async (data) => {
+  try {
+    //console.log("data selectAuctionWinner", data);
+    const response = await axios.get(
+      `http://localhost:8000/api/v1/bids/${data.id}/winner`
+    );
+    //console.log("response selectAuctionWinner", response.data);
+    return response.data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data.message) || error.message;
+    //console.error("Error with selectAuctionWinner", error);
+    return { message, isError: true };
+  }
+};
 
-// const getSellerAuction = async () => {
-//   try {
-//     const response = await axios.get(`${API_URL}/auctions/user-auctions`, {
-//       withCredentials: true,
-//     });
-//     //console.log("response getSellerAuction", response.data);
-//     return response.data;
-//   } catch (error) {
-//     const message =
-//       (error.response && error.response.data.message) || error.message;
-//     //console.error("Error with getSellerAuction", error);
-//     return { message, isError: true };
-//   }
-// };
+const getSellerAuction = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/auctions/user-auctions`, {
+      withCredentials: true,
+    });
+    //console.log("response getSellerAuction", response.data);
+    return response.data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data.message) || error.message;
+    //console.error("Error with getSellerAuction", error);
+    return { message, isError: true };
+  }
+};
 
-// const deleteSingleAuctionById = async (id) => {
-//   try {
-//     const response = await axios.delete(`${API_URL}/auctions/delete/${id}`, {
-//       withCredentials: true,
-//     });
-//     //console.log("response deleteSingleAuctionById", response.data);
-//     return response.data;
-//   } catch (error) {
-//     const message =
-//       (error.response && error.response.data.message) || error.message;
-//     //console.error("Error with deleteSingleAuctionById", error);
-//     return { message, isError: true };
-//   }
-// };
+const deleteSingleAuctionById = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/auctions/delete/${id}`, {
+      withCredentials: true,
+    });
+    //console.log("response deleteSingleAuctionById", response.data);
+    return response.data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data.message) || error.message;
+    //console.error("Error with deleteSingleAuctionById", error);
+    return { message, isError: true };
+  }
+};
 
-// const deleteAuctionByAdminById = async (id) => {
-//   try {
-//     const response = await axios.delete(`${API_URL}/auctions/admin-delete/${id}`, {
-//       withCredentials: true,
-//     });
-//     //console.log("response deleteSingleAuctionById", response.data);
-//     return response.data;
-//   } catch (error) {
-//     const message =
-//       (error.response && error.response.data.message) || error.message;
-//     //console.error("Error with deleteSingleAuctionById", error);
-//     return { message, isError: true };
-//   }
-// };
+const deleteAuctionByAdminById = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/auctions/admin-delete/${id}`, {
+      withCredentials: true,
+    });
+    //console.log("response deleteSingleAuctionById", response.data);
+    return response.data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data.message) || error.message;
+    //console.error("Error with deleteSingleAuctionById", error);
+    return { message, isError: true };
+  }
+};
 
-// const updateSingleAuction=async(data)=>{
-//     //console.log(data.data, "data updateSingleAuction");
+const updateSingleAuction=async(data)=>{
+    //console.log(data.data, "data updateSingleAuction");
 
-//     try{
-//         const response = await axios.put(`${API_URL}/auctions/update/${data.id}`,data.data, {withCredentials:true});
-//         //console.log("response updateSingleAuction", response.data);
-//         return response.data;
-//     }catch(error){
-//         const message = (error.response && error.response.data.message) || error.message;
-//         //console.error("Error with updateSingleAuction", error);
-//         return {message, isError:true};
-//     }
-// }
+    try{
+        const response = await axios.put(`${API_URL}/auctions/update/${data.id}`,data.data, {withCredentials:true});
+        //console.log("response updateSingleAuction", response.data);
+        return response.data;
+    }catch(error){
+        const message = (error.response && error.response.data.message) || error.message;
+        //console.error("Error with updateSingleAuction", error);
+        return {message, isError:true};
+    }
+}
 
-// const getWinnerDetail=async(id)=>{
-//     try{
-//         const response = await axios.get(`${API_URL}/auctions/${id}/winner`);
-//         //console.log("response getWinnerDetail", response.data);
-//         return response.data;
-//     }catch(error){
-//         const message = (error.response && error.response.data.message) || error.message;
-//         //console.error("Error with getWinnerDetail", error);
-//         return {message, isError:true};
-//     }
-// }
+const getWinnerDetail=async(id)=>{
+    try{
+        const response = await axios.get(`${API_URL}/auctions/${id}/winner`);
+        //console.log("response getWinnerDetail", response.data);
+        return response.data;
+    }catch(error){
+        const message = (error.response && error.response.data.message) || error.message;
+        //console.error("Error with getWinnerDetail", error);
+        return {message, isError:true};
+    }
+}
 
 
 const getLiveAuctions=async()=>{
@@ -200,19 +194,19 @@ const getUpcomingAuctions=async()=>{
 
 
 const auctionService = {
-  // getWinnerDetail,
+  getWinnerDetail,
   createAuction,
   getAllAuctions,
   getSingleAuctionById,
   updateAuctionStatus,
-  // selectAuctionWinner,
-  // getSellerAuction,
-  // deleteSingleAuctionById,
-  // updateSingleAuction,
+  selectAuctionWinner,
+  getSellerAuction,
+  deleteSingleAuctionById,
+  updateSingleAuction,
   getLiveAuctions,
   getUpcomingAuctions,
   // updatePaymentStatus,
-  // deleteAuctionByAdminById
+  deleteAuctionByAdminById
 };
 
 export default auctionService;

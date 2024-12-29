@@ -5,11 +5,8 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
-import PaymentMethod from "../models/userPaymentMethod.model.js";
-import Stripe from 'stripe';
 import mongoose from "mongoose";
-// const stripe= new Stripe(process.env.STRIPE_KEY);
-const stripe = new Stripe("sk_test_51P5t81Lvvxf0OOpIgdu78eLqln3YJO5Q7NfKMfNEl93qXkiLjy6FBzvY37O8p1QlhWOWwQUg6m9zU5WtDaYfKMLS00rhq7lcCT")
+import { credentials } from "../Config/credentials.js";
 
 
 // @desc Register user
@@ -35,15 +32,6 @@ const registerUser = asyncHandler(async (req, res) => {
     return res.status(409).json(new ApiResponse(409, "User already exists"));
   }
 
-  const customer=await stripe.customers.create({
-    email:email,
-    name:fullName
-});
-
-
-if(!customer){
-  return res.status(500).json(new ApiResponse(500, "Error creating user. Please try again"));
-}
 
   const user = await User.create({
     fullName: fullName.toLowerCase(),
@@ -56,12 +44,6 @@ if(!customer){
   if (!createdUser) {
     return res.status(500).json(new ApiResponse(500, "Error creating user"));
   }
-
-  //create payment method
-  const paymentMethod = await PaymentMethod.create({
-    stripeCustomerId: customer.id,
-    userId: createdUser._id,
-  });
 
   return res
     .status(201)
@@ -139,13 +121,13 @@ const forgetPasswordSendEmail = asyncHandler(async (req, res) => {
       port: 465,
       secure: true,
       auth: {
-        user: process.env.USER_EMAIL,
-        pass: process.env.USER_PASSWORD,
+        user: credentials.user1,
+        pass: credentials.pass1,
       },
     });
 
     const mailOptions = {
-      from: process.env.USER_EMAIL,
+      from: credentials.user1,
       to: user.email,
       subject: "Password Reset",
       text: `Dear ${user.fullName},\n\nPlease click on the following link ${resetUrl} to reset your password.\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n`,

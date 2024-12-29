@@ -4,6 +4,10 @@ import { ApiError } from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import  User  from "../models/user.model.js";
 
+const JWT_SECRET = "Hello123@";
+const JWT_EXPIRES_IN = "27d"; // Default expiration for JWT tokens
+const RESET_TOKEN_SECRET = "Reset123@"; // Secret for reset tokens
+const RESET_TOKEN_EXPIRATION = "10m"; // Expiration time for reset tokens
 
 export const verifyUser = asyncHandler(async (req, res, next) => {
   try {
@@ -13,8 +17,8 @@ export const verifyUser = asyncHandler(async (req, res, next) => {
       return res.status(401).json(new ApiResponse(401, "Unauthorized request"));
     }
 
-    const decodedToken = await jwt.verify(token, process.env.JWT_SECRET);
-    //console.log(decodedToken, "decodedToken")
+    const decodedToken = await jwt.verify(token,JWT_SECRET);
+    console.log(decodedToken, "decodedToken")
 
     const user = await User.findById(decodedToken?._id).select("-password");
 

@@ -6,12 +6,6 @@ import ProductCategory from "../models/productCategory.model.js";
 import Auction from "../models/auction.model.js";
 
 
-
-// name: { type: String, required: true, unique: true },
-//   description: { type: String },
-//   imageUrl: { type: String }, 
-
-
 // @desc Create product category
 // @route POST /api/v1/product-categories
 // @access Private
@@ -156,18 +150,6 @@ const deleteProductCategory = asyncHandler(async (req, res) => {
         
     }
 })
-
-
-
-{/* <div>
-<h3>Total Categories: {totalCategories}</h3>
-<h3>Most Populated Category: {mostPopulatedCategory}</h3>
-<h3>Least Populated Category: {leastPopulatedCategory}</h3>
-<h3>Recently Added Category: {recentlyAddedCategory}</h3>
-
-{/* Rest of your component */}
-// </div> */}
-
 
 // @desc Get total number & Popular & 
 // @route GET /api/v1/product-categories/detail

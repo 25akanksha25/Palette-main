@@ -23,7 +23,7 @@ const UpcommingHome = () => {
   return (
     <>
       <div className="">
-        <h2 className="text-3xl font-bold text-black mb-5 text-left">Upcoming </h2>
+        <h2 className="text-4xl font-bold text-black mb-5 text-left">Upcoming </h2>
 
         <swiper-container
           breakpoints={JSON.stringify({

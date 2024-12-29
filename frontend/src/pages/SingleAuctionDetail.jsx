@@ -3,38 +3,32 @@ import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getSingleAuctionById, reset } from "../store/auction/auctionSlice";
 import CountDownTimer from "../components/CountDownTimer";
-// import BidCard from "../components/BidCard";
-// import { placeABid } from "../store/bid/bidSlice";
+import BidCard from "../components/BidCard";
+import { placeABid } from "../store/bid/bidSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import { sendNewBidNotification } from "../store/notification/notificationSlice";
+import { sendNewBidNotification } from "../store/notification/notificationSlice";
 import socket from "../socket";
-// import { getAllBidsForAuction } from "../store/bid/bidSlice";
+import { getAllBidsForAuction } from "../store/bid/bidSlice";
 import Loading from "../components/Loading";
 import LiveHome from "../components/home/LiveHome";
 
 const SingleAuctionDetail = ({ noPadding }) => {
   const [newBidAmount, setNewBidAmount] = useState("");
   const logInUser = JSON.parse(localStorage.getItem("user"));
-  console.log("login",logInUser);
-  
   const { user } = useSelector((state) => state.auth);
-  console.log("user",user);
-  
-
   const [activeTab, setActiveTab] = useState("description");
   const params = useParams();
   const dispatch = useDispatch();
   const { singleAuction } = useSelector((state) => state.auction);
-//   const { bids } = useSelector((state) => state.bid);
+  const { bids } = useSelector((state) => state.bid);
   const [auctionStarted, setAuctionStarted] = useState(false);
   const [singleAuctionData, setSingleAuctionData] = useState();
   //console.log((singleAuctionData, "singleAuctionData............"));
-//   const [auctionWinnerDetailData, setAuctionWinnerDetailData] = useState();
+  const [auctionWinnerDetailData, setAuctionWinnerDetailData] = useState();
   const [bidsData, setBidsData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(auctionStarted);
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -61,9 +55,9 @@ const SingleAuctionDetail = ({ noPadding }) => {
     
   });
 
-//   const handleWinner = () => {
-//     socket.emit("selectWinner", params?.id);
-//   };
+  const handleWinner = () => {
+    socket.emit("selectWinner", params?.id);
+  };
 
   //console.log(params.id);
   //console.log(singleAuction);
@@ -75,7 +69,7 @@ const SingleAuctionDetail = ({ noPadding }) => {
     Promise.all([dispatch(getSingleAuctionById(params?.id))]).then(() => {
       setIsLoading(false);
     });
-    // dispatch(getAllBidsForAuction(params?.id));
+    dispatch(getAllBidsForAuction(params?.id));
   }, [params?.id]);
 
   //console.log("useEffect is running.new new....");
@@ -107,10 +101,10 @@ const SingleAuctionDetail = ({ noPadding }) => {
     //console.log("useEffect is running.new new bidsdata bidsdata bidsdata....");
   }, [bidsData]);
 
-//   useEffect(() => {
-//     setBidsData(bids);
-//     setSingleAuctionData(singleAuction);
-//   }, [bids, singleAuction]);
+  useEffect(() => {
+    setBidsData(bids);
+    setSingleAuctionData(singleAuction);
+  }, [bids, singleAuction]);
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -122,91 +116,53 @@ const SingleAuctionDetail = ({ noPadding }) => {
     });
   }, []);
 
-  // const placeBidHandle = async (e) => {
-  //   e.preventDefault();
-  //   //console.log((singleAuctionData, "singleAuctionData............"));
-  //   if (user?.paymentVerified === false) {
-  //     toast.info(
-  //       "Please verify your payment method to place a bid. Go to settings..."
-  //     );
-  //   }
-  //   let bidData = {
-  //     id: params.id,
-  //     amount: Math.floor(newBidAmount),
-  //   };
-  //   if (Math.floor(newBidAmount) <= singleAuctionData?.startingPrice) {
-  //     toast.info("Bid amount should be greater than the currnt bid");
-  //     //console.log(new Date().getTime() / 1000 + " seconds");
-  //   } else if (singleAuction?.endTime < new Date().getTime() / 1000) {
-  //     toast.info("Auction time is over");
-  //   } else {
-  //     dispatch(placeABid(bidData));
-  //     setNewBidAmount("");
-  //     // setSingleAuctionData(newBidAmount);
+  const placeBidHandle = async (e) => {
+    e.preventDefault();
+    //console.log((singleAuctionData, "singleAuctionData............"));
+    // if (user?.paymentVerified === false) {
+    //   toast.info(
+    //     "Please verify your payment method to place a bid. Go to settings..."
+    //   );
+    // }
+    let bidData = {
+      id: params.id,
+      amount: Math.floor(newBidAmount),
+    };
+    if (Math.floor(newBidAmount) <= singleAuctionData?.startingPrice) {
+      toast.info("Bid amount should be greater than the currnt bid");
+      //console.log(new Date().getTime() / 1000 + " seconds");
+    } else if (singleAuction?.endTime < new Date().getTime() / 1000) {
+      toast.info("Auction time is over");
+    } else {
+      dispatch(placeABid(bidData));
+      setNewBidAmount("");
+      // setSingleAuctionData(newBidAmount);
 
-  //     socket.emit("newBid", {
-  //       profilePicture: logInUser?.profilePicture,
-  //       fullName: logInUser?.fullName,
-  //       bidAmount: Math.floor(newBidAmount),
-  //       bidTime: new Date().getTime(),
-  //       auctionId: params.id,
-  //     });
+      socket.emit("newBid", {
+        profilePicture: logInUser?.profilePicture,
+        fullName: logInUser?.fullName,
+        bidAmount: Math.floor(newBidAmount),
+        bidTime: new Date().getTime(),
+        auctionId: params.id,
+      });
 
-  //     await socket.emit("sendNewBidNotification", {
-  //       auctionId: params.id,
-  //       type: "BID_PLACED",
-  //       newBidAmount: newBidAmount,
-  //       fullName: logInUser?.fullName,
-  //       id: logInUser?._id,
-  //     });
-  //     setActiveTab("bids");
-  //     dispatch(
-  //       sendNewBidNotification({
-  //         auctionId: params.id,
-  //         type: "BID_PLACED",
-  //         newBidAmount: newBidAmount,
-  //       })
-  //     );
-  //   }
-  // };
-//   const placeBidHandle = async (e) => {
-//     e.preventDefault();
-  
-//     if (Math.floor(newBidAmount) <= singleAuctionData?.startingPrice) {
-//       toast.info("Bid amount should be greater than the current bid");
-//     } else if (singleAuction?.endTime < new Date().getTime() / 1000) {
-//       toast.info("Auction time is over");
-//     } else {
-//       dispatch(placeABid({ id: params.id, amount: Math.floor(newBidAmount) }));
-//       setNewBidAmount("");
-  
-//       socket.emit("newBid", {
-//         profilePicture: logInUser?.profilePicture,
-//         fullName: logInUser?.fullName,
-//         bidAmount: Math.floor(newBidAmount),
-//         bidTime: new Date().getTime(),
-//         auctionId: params.id,
-//       });
-  
-//       await socket.emit("sendNewBidNotification", {
-//         auctionId: params.id,
-//         type: "BID_PLACED",
-//         newBidAmount: newBidAmount,
-//         fullName: logInUser?.fullName,
-//         id: logInUser?._id,
-//       });
-  
-//       setActiveTab("bids");
-//       dispatch(
-//         sendNewBidNotification({
-//           auctionId: params.id,
-//           type: "BID_PLACED",
-//           newBidAmount: newBidAmount,
-//         })
-//       );
-//     }
-//   };
-  
+      await socket.emit("sendNewBidNotification", {
+        auctionId: params.id,
+        type: "BID_PLACED",
+        newBidAmount: newBidAmount,
+        fullName: logInUser?.fullName,
+        id: logInUser?._id,
+      });
+      setActiveTab("bids");
+      dispatch(
+        sendNewBidNotification({
+          auctionId: params.id,
+          type: "BID_PLACED",
+          newBidAmount: newBidAmount,
+        })
+      );
+    }
+  };
   if (isLoading) {
     return <Loading />;
   }
@@ -239,7 +195,7 @@ const SingleAuctionDetail = ({ noPadding }) => {
               </a>
               <a
                 href="#"
-                className="px-4 py-1 border rounded-full  border-gray-600 transition-all"
+                className="px-4 py-1 border rounded-full  border-gray-600  transition-all"
               >
                 {singleAuction?.location?.name}
               </a>
@@ -266,11 +222,11 @@ const SingleAuctionDetail = ({ noPadding }) => {
               </div>
             </div>
             {/* TABS buttons */}
-            <div className="flex gap-4 pt-4 font-bold text-white ">
+            <div className="flex gap-4 pt-4 font-bold  ">
               <button
                 className={`px-5 py-2 rounded-xl   ${
                   activeTab === "description"
-                    ? "bg-black"
+                    ? "bg-black text-white"
                     : "bg-gray-600 text-white"
                 }`}
                 onClick={() => setActiveTab("description")}
@@ -280,7 +236,7 @@ const SingleAuctionDetail = ({ noPadding }) => {
               <button
                 className={`px-5 py-2 rounded-xl   ${
                   activeTab === "bids"
-                    ? "bg-black"
+                    ? "bg-black text-white"
                     : "bg-gray-600 text-white"
                 }`}
                 onClick={() => setActiveTab("bids")}
@@ -310,12 +266,11 @@ const SingleAuctionDetail = ({ noPadding }) => {
               } no-scrollbar`}
             >
               {/* map over bids array */}
-              
-              {/* {singleAuction?.bids?.length > 0 || bidsData.length > 0 ? (
+              {singleAuction?.bids?.length > 0 || bidsData.length > 0 ? (
                 bidsData?.map((bid) => <BidCard key={bid._id} bid={bid} />)
               ) : (
-                <h1 className="text-white">No bids yet</h1>
-              )} */}
+                <h1 className="text-black">No bids yet</h1>
+              )}
             </div>
           </div>
 
@@ -343,7 +298,7 @@ const SingleAuctionDetail = ({ noPadding }) => {
                     startTime={singleAuction?.startTime}
                     endTime={singleAuction?.endTime}
                     id={singleAuction?._id}
-                    // Winner={handleWinner}
+                    Winner={handleWinner}
                   />
                 </p>
               </div>
@@ -351,14 +306,14 @@ const SingleAuctionDetail = ({ noPadding }) => {
           </div>
 
           {/* // detail about current bid and timer  */}
-          {/* <div className=" flex flex-col gap-4 pt-4 border-t border-border-info-color ">
+          <div className=" flex flex-col gap-4 pt-4 border-t border-border-info-color ">
             {singleAuction?.status === "over" || auctionWinnerDetailData ? (
               bidsData.length > 0 ? (
                 <>
                   <div>
-                    <h1 className="font-bold text-white">Winner</h1>
-                    <div className="flex sm:gap-10 items-center border mt-2 justify-between md:w-[80%] py-1 px-2 md:px-5 border-theme-bg-light rounded-full">
-                      <div className="flex gap-4 items-center text-white">
+                    <h1 className="font-bold text-black">Winner</h1>
+                    <div className="flex sm:gap-10 items-center border mt-2 justify-between md:w-[80%] py-1 px-2 md:px-5 border-gray-300 rounded-full">
+                      <div className="flex gap-4 items-center text-black">
                         <img
                           src={
                             auctionWinnerDetailData?.bidder?.profilePicture ||
@@ -372,7 +327,7 @@ const SingleAuctionDetail = ({ noPadding }) => {
                             {auctionWinnerDetailData?.bidder?.fullName ||
                               singleAuction?.winner?.bidder?.fullName}
                           </span>
-                          <span className="text-xs text-body-text-color">
+                          <span className="text-xs text-black">
                             {new Date(
                               auctionWinnerDetailData?.bidTime ||
                                 singleAuction?.winner?.bidTime
@@ -385,8 +340,8 @@ const SingleAuctionDetail = ({ noPadding }) => {
                           </span>
                         </div>
                       </div>
-                      <div className="text-white">
-                        Bid Amount : $
+                      <div className="text-balck">
+                        Bid Amount : ₹
                         {auctionWinnerDetailData?.bidAmount ||
                           singleAuction?.winner?.bidAmount}
                       </div>
@@ -394,54 +349,55 @@ const SingleAuctionDetail = ({ noPadding }) => {
                   </div>
                 </>
               ) : (
-                <h1 className="text-white">No bids</h1>
+                <h1 className="text-black">No bids</h1>
               )
             ) : (
               auctionStarted && (
                 <form
-  className="flex justify-between flex-wrap gap-4 items-center"
-//   onSubmit={placeBidHandle}
->
-  <input
-    type="number"
-    className="outline-none text-slate-300 px-3 py-4 rounded-xl bg-theme-bg2 border border-border-info-color focus:border-theme-color transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-    placeholder="Enter your bid"
-    value={newBidAmount}
-    onChange={(e) => setNewBidAmount(e.target.value)}
-    required
-  />
-  {logInUser ? (
-    <button
-      type="submit"
-      disabled={
-        user.userType === 'seller' || !auctionStarted
-      }
-      className={`bg-color-primary py-2 px-4 rounded-lg text-white ${
-        user.userType === 'seller'
-          ? "bg-theme-bg2 text-body-text-color cursor-not-allowed border border-border-info-color hover:border-color-danger"
-          : "bg-color-primary border cursor-pointer border-border-info-color hover:bg-color-danger"
-      } ${
-        !auctionStarted
-          ? "bg-theme-bg2 text-body-text-color"
-          : "bg-color-primary"
-      } `}
-    >
-      Place Bid
-    </button>
-  ) : (
-    <Link
-      to="/login"
-      className="bg-color-primary py-2 px-4 rounded-lg cursor-pointer text-white"
-    >
-      Place Bid
-    </Link>
-  )}
-</form>
-
-                
+                  className="flex justify-between flex-wrap gap-4 items-center"
+                  onSubmit={placeBidHandle}
+                >
+                  {/* input button for bid */}
+                  <input
+                    type="number"
+                    className="outline-none text-black placeholder:text-white px-3 py-4 rounded-xl bg-gray-400 border border-border-info-color  transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    placeholder="Enter your bid"
+                    value={newBidAmount}
+                    onChange={(e) => setNewBidAmount(e.target.value)}
+                    required
+                  />
+                  {logInUser ? (
+                      <button
+                        type="submit"
+                        disabled={
+                          singleAuction?.seller?._id === logInUser?._id
+                            ? true
+                            : false || !auctionStarted
+                        }
+                        className={`bg-black py-2 px-4 rounded-lg  text-white ${
+                          singleAuction?.seller?._id === logInUser?._id
+                            ? "bg-black text-white cursor-not-allowed border border-border-info-color "
+                            : "bg-black text-white border cursor-pointer border-border-info-color"
+                        } ${
+                          !auctionStarted
+                            ? "bg-black text-white"
+                            : "bg-black "
+                        } `}
+                      >
+                        Place Bid
+                      </button>
+                  ) : (
+                    <Link
+                      to="/login"
+                      className="bg-black py-2 px-4 rounded-lg cursor-pointer text-white"
+                    >
+                      Place Bid
+                    </Link>
+                  )}
+                </form>
               )
             )}
-          </div> */}
+          </div>
         </div>
       </div>
       {/* <div className="mx-8">

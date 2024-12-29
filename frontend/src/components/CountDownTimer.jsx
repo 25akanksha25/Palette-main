@@ -3,7 +3,7 @@ import Countdown from "react-countdown";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateAuctionStatus,
-  // selectAuctionWinner,
+  selectAuctionWinner,
   reset,
 } from "../store/auction/auctionSlice";
 

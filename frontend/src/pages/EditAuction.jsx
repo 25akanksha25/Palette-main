@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getSingleAuctionById,
   reset,
-  // updateSingleAuction,
+  updateSingleAuction,
 } from "../store/auction/auctionSlice.js";
 import { getAllCategories } from "../store/category/categorySlice.js";
 import { getAllCities } from "../store/city/citySlice.js";
@@ -183,7 +183,7 @@ const EditAuction = () => {
           />
         </div>
 
-        <div className="flex flex-col gap-4 lg:w-[50%] inputs:outline-none p-8 inputs:px-4 inputs:py-3 inputs:rounded-xl select:px-4 select:py-3 select:rounded-xl select:cursor-pointer border border-border-info-color inputs:bg-theme-bg inputs:border inputs:border-border-info-color focus:inputs:border-theme-color select:border select:border-border-info-color inputs:placeholder-body-text-color text-slate-300 rounded-2xl [&_label]:mb-2 [&_label]:text-body-text-color [&_*]:transition-all">
+        <div className="flex flex-col gap-4 lg:w-[50%] inputs:outline-none p-8 inputs:px-4 inputs:py-3 inputs:rounded-xl select:px-4 select:py-3 select:rounded-xl select:cursor-pointer border border-border-info-color inputs:bg-theme-bg inputs:border inputs:border-border-info-color select:border select:border-border-info-color inputs:placeholder-body-text-color text-slate-300 rounded-2xl [&_label]:mb-2 [&_label]:text-body-text-color [&_*]:transition-all">
           <div className="grid">
             <label htmlFor="product_name" className="text-white  mb-1">
               Product Name

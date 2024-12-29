@@ -1,8 +1,12 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+
 const ProcessHome = () => {
   return (
-    <div className="">
-      <h2 className="text-4xl font-medium text-black mb-10 text-center items-center">
+    <div>
+      <h2 className="text-4xl font-medium text-black mb-10 text-left items-center flex gap-3">
         Create And Sell Your Products
+        <FontAwesomeIcon icon={faArrowRight} className="text-black text-2xl" />
       </h2>
       <div className="grid grid-cols-1 m-auto gap-5 w-full md:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col text-black gap-4 justify-start p-8 rounded-2xl border-2 border-gray-800">

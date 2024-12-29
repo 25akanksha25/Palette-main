@@ -35,24 +35,25 @@ const Sidebar = () => {
 
   return (
     <div className="w-full lg:w-[25%] min-w-[250px] lg:max-w-[350px] ">
-      <div className="text-white bg-theme-bg p-5 rounded-2xl">
-        <ul className="flex flex-col gap-1 font-medium cursor-pointer">
+      <div className="text-white bg-gray-100 p-5 rounded-2xl border border-gray-600">
+        <ul className="flex flex-col gap-1 font-medium cursor-pointer text-black">
           <li>
             <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-theme-color hover:bg-theme transition-all duration-500 ${
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
                 activeLink === "/user-profile/profile"
-                  ? "bg-theme-color hover:text-white"
+                  ? "bg-pink-400 hover:text-white"
                   : ""
               }`}
               to="/user-profile/profile"
               onClick={() => handleLinkClick("/user-profile/profile")}
             >
-              <FaUser
+              {/* <FaUser
                 size={16}
                 className={`text-theme-color transition-all duration-500 ${
                   activeLink === "/user-profile/profile" ? " text-white" : ""
                 }`}
-              />
+              /> */}
+              <FaUser size={16} className="text-black" />
               Profile
             </Link>
           </li>
@@ -61,31 +62,33 @@ const Sidebar = () => {
             <>
               <li>
                 <Link
-                  className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-theme-color hover:bg-theme transition-all duration-500 ${
+                  className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
                     activeLink === "/user-profile/manage-items"
-                      ? "bg-theme-color hover:text-white"
+                      ? "bg-pink-400 hover:text-white"
                       : ""
                   }`}
                   to="/user-profile/manage-items"
                   onClick={() => handleLinkClick("/user-profile/manage-items")}
                 >
-                  <FaEdit
+                  {/* <FaEdit
                     size={16}
                     className={`text-theme-color transition-all duration-500 ${
                       activeLink === "/user-profile/manage-items"
                         ? " text-white"
                         : ""
                     }`}
-                  />
+                  /> */}
+                  <FaEdit size={16} className="text-black" />
                   Manage Items
                 </Link>
               </li>
               <li>
                 <Link
-                  className="flex items-center gap-2  py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-theme-color hover:bg-theme transition-all duration-500"
+                  className="flex items-center gap-2  py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500"
                   to="/create-auction"
                 >
-                  <FaCirclePlus size={16} className="text-theme-color" />
+                  {/* <FaCirclePlus size={16} className="text-theme-color" /> */}
+                  <FaCirclePlus size={16} className="text-black" />
                   Create Auction
                 </Link>
               </li>
@@ -93,120 +96,120 @@ const Sidebar = () => {
           )}
           <li>
             <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-theme-color hover:bg-theme transition-all duration-500 ${
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
                 activeLink === "/user-profile/bids-items"
-                  ? "bg-theme-color hover:text-white"
+                  ? "bg-pink-400 hover:text-white"
                   : ""
               }`}
               to="/user-profile/bids-items"
               onClick={() => handleLinkClick("/user-profile/bids-items")}
             >
-              <IoIosListBox
+              {/* <IoIosListBox
                 size={18}
                 className={`text-theme-color transition-all duration-500 ${
                   activeLink === "/user-profile/bids-items" ? " text-white" : ""
                 }`}
-              />
+              /> */}
+              <IoIosListBox size={18} className="text-black" />
               Bids Items
             </Link>
           </li>
           <li>
-            {/* <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-theme-color hover:bg-theme transition-all duration-500 ${
+            <Link
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
                 activeLink === "/user-profile/notifications"
-                  ? "bg-theme-color hover:text-white"
+                  ? "bg-pink-400 hover:text-white"
                   : ""
               }`}
               to="/user-profile/notifications"
               onClick={() => handleLinkClick("/user-profile/notifications")}
             >
-              <IoIosNotifications
+              {/* <IoIosNotifications
                 size={18}
                 className={`text-theme-color transition-all duration-500 ${
                   activeLink === "/user-profile/notifications"
                     ? " text-white"
                     : ""
                 }`}
-              />
+              /> */}
+              <IoIosNotifications size={18} className="text-black" />
               Notifications
-            </Link> */}
+            </Link>
           </li>
           <li>
             <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-theme-color hover:bg-theme transition-all duration-500 ${
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
                 activeLink === "/user-profile/account-settings"
-                  ? "bg-theme-color hover:text-white"
+                  ? "bg-pink-400 hover:text-white"
                   : ""
               }`}
               to="/user-profile/account-settings"
               onClick={() => handleLinkClick("/user-profile/account-settings")}
             >
-              <IoMdSettings
+              {/* <IoMdSettings
                 size={18}
                 className={`text-theme-color transition-all duration-500 ${
                   activeLink === "/user-profile/account-settings"
                     ? " text-white"
                     : ""
                 }`}
-              />
+              /> */}
+              <IoMdSettings size={18} className="text-black" />
               Account Settings
             </Link>
           </li>
           <li>
             <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-theme-color hover:bg-theme transition-all duration-500 ${
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
                 activeLink === "/user-profile/change-password"
-                  ? "bg-theme-color hover:text-white"
+                  ? "bg-pink-400 hover:text-white"
                   : ""
               }`}
               to="/user-profile/change-password"
               onClick={() => handleLinkClick("/user-profile/change-password")}
             >
-              <RiLockPasswordFill
+              {/* <RiLockPasswordFill
                 size={16}
                 className={`text-theme-color transition-all duration-500 ${
                   activeLink === "/user-profile/change-password"
                     ? " text-white"
                     : ""
                 }`}
-              />
+              /> */}
+              <RiLockPasswordFill size={16} className="text-black" />
               Change Password
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-theme-color hover:bg-theme transition-all duration-500` 
-              // ${
-              //   activeLink === "/user-profile/payment-method"
-              //     ? "bg-theme-color hover:text-white"
-              //     : ""
-              // }
-              }
-              // to="/user-profile/payment-method"
-              // onClick={() => handleLinkClick("/user-profile/payment-method")}
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
+                activeLink === "/user-profile/payment-method"
+                  ? "bg-pink-400 hover:text-white"
+                  : ""
+              }`}
+              to="/user-profile/payment-method"
+              onClick={() => handleLinkClick("/user-profile/payment-method")}
             >
               <IoWalletOutline
                 size={18}
-                className={`text-theme-color transition-all duration-500 `
-                // ${
-                //   activeLink === "/user-profile/payment-method"
-                //     ? " text-white"
-                //     : ""
-                // }
-              
-                }
-              />
+                className={`text-theme-color transition-all duration-500 ${
+                  activeLink === "/user-profile/payment-method"
+                    ? " text-white"
+                    : ""
+                }`}
+              /> 
+              <IoWalletOutline size={18} className="text-black" />
               Payment Method
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
-              className="flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-theme-color hover:bg-theme transition-all duration-500"
+              className="flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500"
               onClick={() => {
                 logoutHandle();
               }}
             >
-              <IoLogOutSharp size={18} className="text-theme-color" />
+              <IoLogOutSharp size={18} className="text-black" />
               Logout
             </Link>
           </li>

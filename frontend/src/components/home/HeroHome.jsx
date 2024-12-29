@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
 import herovector from "../../assets/heroimg.jfif";
 import { RiFindReplaceLine } from "react-icons/ri";
+
+
 const HeroHome = () => {
   const logInUser = JSON.parse(localStorage.getItem("user"));
   return (

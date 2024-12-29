@@ -29,7 +29,6 @@ export const socketIoConnectioin = () => {
         io.to(user.socketId).emit("newBidData", data);
       });
     });
-    // socket.emit("sendNewBidNotification",{auctionId:params.id,type:"BID_PLACED",newBidAmount:newBidAmount})
 
     socket.on("sendNewBidNotification", async (data) => {
       //send message to all users who are in users

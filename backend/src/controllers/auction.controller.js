@@ -61,6 +61,12 @@ const createAuction = asyncHandler(async (req, res) => {
         .json(new ApiResponse(400, "Starting price must be a positive number"));
     }
 
+    if (startingPrice >= 1000000000000) {
+      return res
+        .status(400)
+        .json(new ApiResponse(400, "Starting price cannot exceed 1 trillion"));
+    }
+
     const imgUrlCloudinary = await uploadOnCloudinary(image);
     console.log("Cloudinary response:", imgUrlCloudinary);
 
@@ -256,73 +262,73 @@ const updateAuctionStatus = asyncHandler(async (req, res) => {
 // @route GET /api/v1/auctions/user-bids
 // @access Private
 
-// const getBidsAuctionsByUser = asyncHandler(async (req, res) => {
-//   try {
+const getBidsAuctionsByUser = asyncHandler(async (req, res) => {
+  try {
 
-//     const bids = await Bid.find({ bidder: req.user._id }).populate("auction")
-//     // populate category in auction
-//     .populate({
-//       path: "auction",
-//       populate: {
-//         path: "category",
-//         select: "name",
+    const bids = await Bid.find({ bidder: req.user._id }).populate("auction")
+    // populate category in auction
+    .populate({
+      path: "auction",
+      populate: {
+        path: "category",
+        select: "name",
        
-//       }
-//     })
-//     .sort({ createdAt: -1 });
-//     // it is not showing in reverse order
+      }
+    })
+    .sort({ createdAt: -1 });
+    // it is not showing in reverse order
     
 
-//     if (!bids) {
-//       return res.status(404).json(new ApiResponse(404, "No bids found"));
-//     }
+    if (!bids) {
+      return res.status(404).json(new ApiResponse(404, "No bids found"));
+    }
 
     
 
-//     return res.json(
-//       new ApiResponse(200, "bids retrieved successfully", bids)
-//     );
-//   } catch (error) {
-//     return res
-//       .status(500)
-//       .json(new ApiResponse(500, error?.message || "Internal server error"));
-//   }
-// });
+    return res.json(
+      new ApiResponse(200, "bids retrieved successfully", bids)
+    );
+  } catch (error) {
+    return res
+      .status(500)
+      .json(new ApiResponse(500, error?.message || "Internal server error"));
+  }
+});
 
 
 // @desc Get all auctions by a user uploaded by him
 // @route GET /api/v1/auctions/user-auctions
 // @access Private
 
-// const getAuctionsByUser = asyncHandler(async (req, res) => {
-//   try {
-//     const auctions = await Auction.find({ seller: req.user._id }).populate(
-//       "category",
-//       "name"
-//     )
-//     .populate({
-//       path: "winner",
-//       populate: {
-//         path: "bidder",
-//         select: "fullName",
-//       }})
-//       .sort({createdAt:-1})
+const getAuctionsByUser = asyncHandler(async (req, res) => {
+  try {
+    const auctions = await Auction.find({ seller: req.user._id }).populate(
+      "category",
+      "name"
+    )
+    .populate({
+      path: "winner",
+      populate: {
+        path: "bidder",
+        select: "fullName",
+      }})
+      .sort({createdAt:-1})
 
-//     if (!auctions) {
-//       return res.status(404).json(new ApiResponse(404, "No auctions found"));
-//     }
+    if (!auctions) {
+      return res.status(404).json(new ApiResponse(404, "No auctions found"));
+    }
 
-//     return res.json(
-//       new ApiResponse(200, "Auctions retrieved successfully", {
-//         auctions:auctions
-//       })
-//     );
-//   } catch (error) {
-//     return res
-//       .status(500)
-//       .json(new ApiResponse(500, error?.message || "Internal server error"));
-//   }
-// });
+    return res.json(
+      new ApiResponse(200, "Auctions retrieved successfully", {
+        auctions:auctions
+      })
+    );
+  } catch (error) {
+    return res
+      .status(500)
+      .json(new ApiResponse(500, error?.message || "Internal server error"));
+  }
+});
 
 
 
@@ -332,30 +338,30 @@ const updateAuctionStatus = asyncHandler(async (req, res) => {
 // @route DELETE /api/v1/auctions/delete/:id
 // @access Private
 
-// const deleteSingleAuctionById = asyncHandler(async (req, res) => {
-//   try {
-//     const auction = await Auction.findById(req.params.id);
-//     if (!auction) {
-//       return res.status(404).json(new ApiResponse(404, "Auction not found"));
-//     }
-//     //delete all related data to this auction like bids and reviews
+const deleteSingleAuctionById = asyncHandler(async (req, res) => {
+  try {
+    const auction = await Auction.findById(req.params.id);
+    if (!auction) {
+      return res.status(404).json(new ApiResponse(404, "Auction not found"));
+    }
+    //delete all related data to this auction like bids and reviews
 
-//     const bids = await Bid.find({ auction: req.params.id });
-//     if (bids) {
-//       await Bid.deleteMany({ auction: req.params.id });
-//     }
-// console.log(auction, "auction.............");
+    const bids = await Bid.find({ auction: req.params.id });
+    if (bids) {
+      await Bid.deleteMany({ auction: req.params.id });
+    }
+console.log(auction, "auction.............");
 
-// await Auction.deleteOne({ _id: req.params.id });
-// return res.json(
-//       new ApiResponse(200, "Auction deleted successfully", auction)
-//     );
-//   } catch (error) {
-//     return res
-//       .status(500)
-//       .json(new ApiResponse(500, error?.message || "Internal server error"));
-//   }
-// });
+await Auction.deleteOne({ _id: req.params.id });
+return res.json(
+      new ApiResponse(200, "Auction deleted successfully", auction)
+    );
+  } catch (error) {
+    return res
+      .status(500)
+      .json(new ApiResponse(500, error?.message || "Internal server error"));
+  }
+});
 
 
 
@@ -363,132 +369,132 @@ const updateAuctionStatus = asyncHandler(async (req, res) => {
 // @route PUT /api/v1/auctions/update/:id
 // @access Private
 
-// const updateSingleAuactionById = asyncHandler(async (req, res) => {
+const updateSingleAuactionById = asyncHandler(async (req, res) => {
  
 
-//   try {
-//     const {
-//       name,
-//       description,
-//       category,
-//       startTime,
-//       endTime,
-//       startingPrice,
-//       location,
-//     } = req.body;
-//     const image = req.file?.path;
+  try {
+    const {
+      name,
+      description,
+      category,
+      startTime,
+      endTime,
+      startingPrice,
+      location,
+    } = req.body;
+    const image = req.file?.path;
 
-//     console.log(req.body, "req.body........");
-// const auction = await Auction.findById(req.params.id);
-// if (!auction) {
-//   return res.status(404).json(new ApiResponse(404, "Auction not found"));
-// }
-//  // Check if startingPrice is a positive number
-//  if (startingPrice <= 0) {
-//   return res
-//     .status(400)
-//     .json(new ApiResponse(400, "Starting price must be a positive number"));
-// }
+    console.log(req.body, "req.body........");
+const auction = await Auction.findById(req.params.id);
+if (!auction) {
+  return res.status(404).json(new ApiResponse(404, "Auction not found"));
+}
+ // Check if startingPrice is a positive number
+ if (startingPrice <= 0) {
+  return res
+    .status(400)
+    .json(new ApiResponse(400, "Starting price must be a positive number"));
+}
 
-// //check start and now time and update status accordingly
-// let currentDate=new Date();
+//check start and now time and update status accordingly
+let currentDate=new Date();
 
-//  if(startTime !== auction.startTime || endTime !== auction.endTime){
-//   if(currentDate.getTime()>auction.startTime.getTime()){
-//     return res.status(400).json(new ApiResponse(400, "Auction has already started, you can't update start time or end time"));
-//  }
-//  }
+ if(startTime !== auction.startTime || endTime !== auction.endTime){
+  if(currentDate.getTime()>auction.startTime.getTime()){
+    return res.status(400).json(new ApiResponse(400, "Auction has already started, you can't update start time or end time"));
+ }
+ }
 
-// if(startTime > endTime){
-//   return res.status(400).json(new ApiResponse(400, "Start time must be before end time"));
-// }
-// if(startTime < currentDate.getTime()){
-//   auction.status = "active";
-// }else{
-//   auction.status = "upcoming";
-// }
-// if(auction.status === "over"){
-//   return res.status(400).json(new ApiResponse(400, "Auction is over, you can't update"));
-// }
+if(startTime > endTime){
+  return res.status(400).json(new ApiResponse(400, "Start time must be before end time"));
+}
+if(startTime < currentDate.getTime()){
+  auction.status = "active";
+}else{
+  auction.status = "upcoming";
+}
+if(auction.status === "over"){
+  return res.status(400).json(new ApiResponse(400, "Auction is over, you can't update"));
+}
 
-//     if(image){
-//     var imgUrlCloudinary = await uploadOnCloudinary(image);
-//     console.log(imgUrlCloudinary);
-//     if (!imgUrlCloudinary?.url) {
-//       return res.status(400).json(new ApiResponse(400, "Invalid image"));
-//     }
-//   }
+    if(image){
+    var imgUrlCloudinary = await uploadOnCloudinary(image);
+    console.log(imgUrlCloudinary);
+    if (!imgUrlCloudinary?.url) {
+      return res.status(400).json(new ApiResponse(400, "Invalid image"));
+    }
+  }
 
-//     auction.name = name ? name : auction.name;
-//     auction.description = description ? description : auction.description;
-//     auction.category = category ? category : auction.category;
-//     auction.startTime = startTime ? startTime : auction.startTime;
-//     auction.endTime = endTime ? endTime : auction.endTime;
-//     auction.startingPrice = startingPrice ? startingPrice : auction.startingPrice;
-//     auction.location = location ? location : auction.location;
+    auction.name = name ? name : auction.name;
+    auction.description = description ? description : auction.description;
+    auction.category = category ? category : auction.category;
+    auction.startTime = startTime ? startTime : auction.startTime;
+    auction.endTime = endTime ? endTime : auction.endTime;
+    auction.startingPrice = startingPrice ? startingPrice : auction.startingPrice;
+    auction.location = location ? location : auction.location;
 
-//     auction.image = imgUrlCloudinary?.url
-//       ? imgUrlCloudinary.url
-//       : auction.image ;
+    auction.image = imgUrlCloudinary?.url
+      ? imgUrlCloudinary.url
+      : auction.image ;
     
 
 
-//     await auction.save();
-//     return res.status(201).json(new ApiResponse(201, "Auction Updated Successfully."))
+    await auction.save();
+    return res.status(201).json(new ApiResponse(201, "Auction Updated Successfully."))
 
-//   } catch (error) {
-//     console.error(error);
-//     res
-//       .status(error.statusCode || 500)
-//       .json(
-//         new ApiResponse(
-//           error.statusCode || 500,
-//           error.message || "Internal Server Error"
-//         )
-//       );
-//   }
-// });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(error.statusCode || 500)
+      .json(
+        new ApiResponse(
+          error.statusCode || 500,
+          error.message || "Internal Server Error"
+        )
+      );
+  }
+});
 
 // @desc Get auction winner
 // @route GET /api/v1/auctions/:id/winner
 // @access Public
 
-// const getAuctionWinner= asyncHandler(async (req, res) => {
+const getAuctionWinner= asyncHandler(async (req, res) => {
   
-//   try {
-//     const auction = await Auction.findById(req.params.id)
-//     .populate(
-//       {
-//         path: "winner",
+  try {
+    const auction = await Auction.findById(req.params.id)
+    .populate(
+      {
+        path: "winner",
   
-//         populate: {
-//           path: "bidder",
-//           select: "fullName  profilePicture",
-//         },
-//       }
-//     )
+        populate: {
+          path: "bidder",
+          select: "fullName  profilePicture",
+        },
+      }
+    )
       
-//     if (!auction) {
-//       return res.status(404).json(new ApiResponse(404, "Auction not found"));
-//     }
-//     if (auction.bids.length === 0) {
-//       return res.status(404).json(new ApiResponse(404, "No bids found"));
-//     }
-//     const winner={
-//       winnerFullName:auction?.winner?.bidder?.fullName,
-//       winnerProfilePicture:auction?.winner?.bidder?.profilePicture,
-//       winnerBidAmount:auction?.winner?.bidAmount,
-//       winnerBidTime:auction?.winner?.bidTime
-//     }
+    if (!auction) {
+      return res.status(404).json(new ApiResponse(404, "Auction not found"));
+    }
+    if (auction.bids.length === 0) {
+      return res.status(404).json(new ApiResponse(404, "No bids found"));
+    }
+    const winner={
+      winnerFullName:auction?.winner?.bidder?.fullName,
+      winnerProfilePicture:auction?.winner?.bidder?.profilePicture,
+      winnerBidAmount:auction?.winner?.bidAmount,
+      winnerBidTime:auction?.winner?.bidTime
+    }
 
-// return res.status(200).json(new ApiResponse(200, "Auction winner retrieved successfully", {winner:winner}));
+return res.status(200).json(new ApiResponse(200, "Auction winner retrieved successfully", {winner:winner}));
     
-//   } catch (error) {
-//     return res
-//       .status(500)
-//       .json(new ApiResponse(500, error?.message || "Internal server error"));
-//   }
-// });
+  } catch (error) {
+    return res
+      .status(500)
+      .json(new ApiResponse(500, error?.message || "Internal server error"));
+  }
+});
 
 
 
@@ -558,41 +564,16 @@ const getUpcomingAuctions = asyncHandler(async (req, res) => {
 });
 
 
-// @desc update payment status of auction
-// @route PUT /api/v1/auctions/update-payment-status/:id
-// @access Private
-
-// const updatePaymentStatus = asyncHandler(async (req, res) => {
-//   try {
-//     const auction = await Auction.findById(req.params.id);
-//     if (!auction) {
-//       return res.status(404).json(new ApiResponse(404, "Auction not found"));
-//     }
-//     auction.paid = true;
-//     await auction.save();
-//     return res.json(
-//       new ApiResponse(200, "Auction payment status updated successfully", auction)
-//     );
-//   } catch (error) {
-//     return res
-//       .status(500)
-//       .json(new ApiResponse(500, error?.message || "Internal server error"));
-//   }
-// })
-
-
-
 export {
   createAuction,
   getAllAuctions,
   getSingleAuctionById,
   updateAuctionStatus,
-  // getBidsAuctionsByUser,
-  // getAuctionsByUser,
-  // deleteSingleAuctionById,
-  // updateSingleAuactionById,
-  // getAuctionWinner,
+  getBidsAuctionsByUser,
+  getAuctionsByUser,
+  deleteSingleAuctionById,
+  updateSingleAuactionById,
+  getAuctionWinner,
   getLiveAuctions,
   getUpcomingAuctions,
-  // updatePaymentStatus,
 };

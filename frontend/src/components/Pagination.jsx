@@ -11,20 +11,20 @@ const Pagination = (props) => {
       {props.currentPage > 1 && (
         <button
           onClick={() => props.prevPage()}
-          className="bg-[#00A3FF] hover:bg-color-danger text-white transition-all"
+          className="text-white bg-black hover:bg-white hover:text-black border border-black transition-all"
         >
           <FaCaretLeft size={18} />
         </button>
       )}
 
       <span>
-        <span className="ml-3">Page {props.currentPage}</span>
-        <span className="mr-3"> of {pages.length}</span>
+        <span className="ml-3 text-black">Page {props.currentPage}</span>
+        <span className="mr-3 text-black"> of {pages.length}</span>
       </span>
       {props.currentPage < pages.length && (
         <button
           onClick={() => props.nextPage()}
-          className="bg-[#00A3FF] hover:bg-color-danger text-white transition-all"
+          className="text-white bg-black hover:bg-white hover:text-black border border-black transition-all"
         >
           <FaCaretRight size={18} />
         </button>

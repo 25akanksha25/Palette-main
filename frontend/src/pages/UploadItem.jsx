@@ -100,8 +100,8 @@ const UploadItem = () => {
         className="flex flex-col lg:flex-row gap-8 justify-center md:w-[80%] lg:w-[100%] m-auto px-4 py-20"
         onSubmit={handleProductUpload}
       >
-        <div className="text-white lg:w-[22%] lg:min-w-[350px] ">
-          <h1 className="text-white text-2xl font-bold mb-4">Upload Item</h1>
+        <div className="text-white lg:w-[22%] lg:min-w-[350px]">
+          <h1 className="text-black text-4xl italic font-bold mb-4">Upload Item</h1>
 
           {imgUrl ? (
             <img
@@ -116,15 +116,15 @@ const UploadItem = () => {
             <div
               onClick={() => imgRef.current.click()}
               className="w-full h-80
-              rounded-xl border-2 border-dashed border-border-info-color 
-                    flex items-center justify-center
+              rounded-xl border-2 border-dashed border-gray-700 
+                    flex items-center justify-center bg-gray-300 text-gray-800
                     cursor-pointer
                     "
             >
               <div className="text-center flex flex-col items-center gap-2">
-                <IoCloudUploadOutline size={68} className="text-theme-color" />
+                <IoCloudUploadOutline size={68} className="text-gray-800" />
                 <p>Click to Upload</p>
-                <span className="text-body-text-color">
+                <span className="text-gray-700 text-xl">
                   PNG,JPG,JPEG | Max Size 1MB
                 </span>
               </div>
@@ -140,7 +140,7 @@ const UploadItem = () => {
           />
         </div>
         {/* INPUTS */}
-        <div className="flex flex-col gap-4 lg:w-[50%] inputs:outline-none p-8 inputs:px-4 inputs:py-3 inputs:rounded-xl select:px-4 select:py-3 select:rounded-xl select:cursor-pointer border border-border-info-color inputs:bg-theme-bg inputs:border inputs:border-border-info-color focus:inputs:border-theme-color select:border select:border-border-info-color inputs:placeholder-body-text-color text-slate-300 rounded-2xl [&_label]:mb-2 [&_label]:text-body-text-color [&_*]:transition-all">
+        <div className="flex flex-col gap-4 lg:w-[50%] bg-gray-300 inputs:outline-none p-8 inputs:px-4 inputs:py-3 inputs:rounded-xl select:px-4 select:py-3 select:rounded-xl select:cursor-pointer border border-gray-700 inputs:bg-gray-200 inputs:border select:border select:border-border-info-color inputs:placeholder:text-gray-700 text-gray-700 rounded-2xl [&label]:mb-2 [&_label]:text-black [&*]:transition-all">
           <div className="grid">
             <label htmlFor="product_name">Product Name</label>
             <input
@@ -158,7 +158,7 @@ const UploadItem = () => {
           <div className="grid">
             <label htmlFor="category">Category</label>
             <select
-              className="outline-none h-[50px] bg-theme-bg rounded-xl px-3 py-4 cursor-pointer focus:border-theme-color"
+              className="outline-none h-[50px] bg-gray-200 rounded-xl px-3 py-4 cursor-pointer focus:border-theme-color"
               required
               id="category"
               onChange={(e) =>
@@ -175,7 +175,7 @@ const UploadItem = () => {
                 ))}
             </select>
           </div>
-          <div className="grid  lg:grid-cols-2 gap-4 mlg:grid-cols-1">
+          <div className="grid lg:grid-cols-2 gap-4 mlg:grid-cols-1">
             <div className="grid">
               <label htmlFor="start_time">Start Time</label>
               <input
@@ -209,6 +209,7 @@ const UploadItem = () => {
               <input
                 required
                 id="starting_price"
+                placeholder="Price"
                 type="number"
                 onChange={(e) =>
                   setFormData({ ...formData, startingPrice: e.target.value })
@@ -216,10 +217,10 @@ const UploadItem = () => {
                 value={formData.startingPrice}
               />
             </div>
-            <div className="grid ">
+            <div className="grid">
               <label htmlFor="category">Area</label>
               <select
-                className="outline-none h-[50px] bg-theme-bg cursor-pointer focus:border-theme-color"
+                className="outline-none h-[50px] bg-gray-200 cursor-pointer focus:border-theme-color"
                 required
                 id="category"
                 onChange={(e) =>
@@ -244,7 +245,7 @@ const UploadItem = () => {
               required
               id="description"
               rows="7"
-              className="outline-none bg-theme-bg rounded-xl px-3 py-4 border border-border-info-color focus:border-theme-color placeholder-body-text-color"
+              className="outline-none bg-gray-200 rounded-xl px-3 py-4 border border-border-info-color  placeholder:text-gray-700"
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
@@ -253,7 +254,7 @@ const UploadItem = () => {
           </div>
           <button
             type="submit"
-            className="px-3 py-4 rounded-xl text-white cursor-pointer font-bold tracking-wide w-full bg-theme-color hover:bg-color-danger"
+            className="px-3 py-4 rounded-xl text-white cursor-pointer font-bold tracking-wide w-full bg-black border-2 border-black hover:bg-gray-300 hover:text-black"
           >
             Upload
           </button>

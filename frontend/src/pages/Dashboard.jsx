@@ -8,6 +8,7 @@ import SingleAuction from "../components/SingleAuction";
 import SearchLocationCategory from "../components/SearchLocationCategory";
 import Loading from "../components/Loading";
 import Pagination from "../components/Pagination";
+import auctionhead from '../assets/auction-head.jpg';
 import axios from "axios";
 
 const Dashboard = () => {
@@ -52,8 +53,31 @@ const Dashboard = () => {
   // 318f69a969db4f7599b7fbb5043e444e
 
   return (
-    <div className="flex flex-col min-h-screen w-full  bg-[#061224] text-[#7386a8]">
-      <div className="">
+    <div className="flex flex-col min-h-screen w-full bg-white text-black">
+      {/* Banner Section */}
+      <div className="relative w-full h-[400px] bg-gray-100 flex">
+        {/* Image Covering Entire Right Side */}
+        <div className="flex-1 h-full">
+          <img
+            src={auctionhead}
+            alt="Header background"
+            className="w-full h-full object-cover shadow-md"
+          />
+        </div>
+        <div className="flex flex-col mt-8 max-w-lg px-8 py-4">
+          <div className="text-6xl text-black font-bold mb-4">
+            Discover Our Special Feature
+          </div>
+          <div className="text-lg text-gray-700 mt-3">
+            Explore curated galleries featuring timeless and modern treasures. 
+            Discover themes from classical to street art, each offering an immersive experience. 
+            Dive into creative environments.
+          </div>
+        </div>
+      </div>
+
+      {/* Search Section */}
+      <div>
         <SearchLocationCategory />
       </div>
 

@@ -71,36 +71,32 @@ const SearchLocationCategory = () => {
   //console.log(city);
 
   return (
-    <div className="flex justify-center items-center my-5 min-h-[100px]">
-      <div className="flex-col   sm:flex-row sm:items-center   bg-[#061224] text-[#7386a8] rounded-md p-2">
+    <div className="flex justify-center items-center my-5 min-h-[100px] mt-16">
+      <div className="flex flex-wrap justify-center items-center gap-12 bg-white text-black p-4 w-[90%] mb-8">
         <select
           required
-          id="category"
-          className="bg-[#061224] px-2 text-[#7386a8] w-full block sm:w-auto sm:inline  py-3  rounded-lg outline-none border border-border-info-color cursor-pointer"
+          id="location"
+          className="px-16 py-3 bg-white text-black border-2 border-black rounded-lg outline-none cursor-pointer text-lg"
           onChange={(e) => setFilter({ ...filter, location: e.target.value })}
         >
           <option value="">Select Location</option>
-          {
-                city && <option value={city} >
-                Current Location
-                </option>
-              }
+          {city && (
+            <option value={city}>
+              Current Location
+            </option>
+          )}
           {cities.data &&
-            cities.data.map((category) => (
-              <>
-             
-               <option key={category._id} value={category._id}>
-                {category.name}
+            cities.data.map((location) => (
+              <option key={location._id} value={location._id}>
+                {location.name}
               </option>
-              </>
-             
             ))}
         </select>
-
+  
         <select
           required
           id="category"
-          className="bg-[#061224] px-2 text-[#7386a8] w-full mt-2 sm:w-auto   sm:ml-4 block sm:inline   py-3  rounded-lg outline-none border border-border-info-color cursor-pointer"
+          className="px-16 py-3 bg-white text-black border-2 border-black rounded-lg outline-none cursor-pointer text-lg"
           onChange={(e) => setFilter({ ...filter, category: e.target.value })}
         >
           <option value="">Select Category</option>
@@ -111,22 +107,25 @@ const SearchLocationCategory = () => {
               </option>
             ))}
         </select>
+  
         <input
           type="text"
           placeholder="Search Name"
-          className="bg-[#061224] py-3 px-3 text-[#7386a8] mt-2 block sm:w-auto sm:inline rounded-lg  border border-border-info-color sm:mx-4 outline-none placeholder:text-[#7386a8]"
+          className="px-32 py-3 bg-white text-black border-2 border-black rounded-lg outline-none cursor-pointer text-lg"
           value={filter.itemName}
           onChange={(e) => setFilter({ ...filter, itemName: e.target.value })}
         />
+  
         <button
-          className="bg-theme-color mt-2  hover:bg-color-danger text-white text-sm font-bold  rounded-md my-auto px-3 py-2  text-center no-underline border-none"
-          onClick={() => SearchByFilter()}
+          className="bg-black text-white hover:bg-white hover:text-black font-bold border-black border-2 rounded-lg px-12 py-3 text-center"
+          onClick={SearchByFilter}
         >
           Search
         </button>
       </div>
     </div>
   );
+  
 };
 
 export default SearchLocationCategory;

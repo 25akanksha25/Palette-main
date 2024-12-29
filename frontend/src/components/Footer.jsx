@@ -17,7 +17,7 @@ const Footer = () => {
             className="flex items-center mb-4 sm:mb-0 space-x-3 no-underline"
           >
             <h1 className="text-3xl font-bold text-black font-Roboto">
-              <span className="uppercase text-black">LOGO</span>
+              <span className="uppercase text-black">Palette</span>
             </h1>
           </Link>
           <ul className="flex flex-wrap items-center text-sm font-medium text-black list-none">
@@ -52,7 +52,7 @@ const Footer = () => {
           © {new Date().getFullYear()}
           <Link to="/" className="ml-1 no-underline">
             <p className="text-sm font-bold text-theme-color font-Roboto">
-              <span className="uppercase text-theme-color">Palatte</span>
+              <span className="uppercase text-theme-color">Palette</span>
             </p>
           </Link>
           . All Rights Reserved.

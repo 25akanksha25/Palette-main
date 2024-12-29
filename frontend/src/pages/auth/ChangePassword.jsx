@@ -48,12 +48,12 @@ const {isLoading,isSuccess , isError,message}=useSelector((state)=>state.auth)
   };
 
   return (
-    <div className="flex flex-col w-full px-7 py-4 bg-theme-bg text-body-text-color rounded-2xl ">
-      <h2 className=" text-white font-bold text-xl border-b border-border-info-color pb-3 mb-5 ">
+    <div className="flex flex-col w-full px-7 py-4 bg-gray-200 text-black rounded-2xl ">
+      <h2 className=" text-black font-bold text-2xl border-b border-gray-600 pb-3 mb-5 ">
         Change Password
       </h2>
       <form
-        className="flex flex-col gap-5 lg:w-[50%] inputs:outline-none inputs:px-3 inputs:py-4 inputs:rounded-xl inputs:bg-theme-bg2 inputs:border inputs:border-border-info-color focus:inputs:border-theme-color "
+        className="flex flex-col gap-5 lg:w-[50%] inputs:outline-none inputs:px-3 inputs:py-4 inputs:rounded-xl inputs:bg-gray-400 inputs:border"
         onSubmit={handleChangeCurrentPassword}
       >
         <div className="flex flex-col">
@@ -61,7 +61,7 @@ const {isLoading,isSuccess , isError,message}=useSelector((state)=>state.auth)
           <input
             type="password"
             placeholder="Enter old Password"
-            className="text-white placeholder-body-text-color"
+            className="text-black placeholder:text-gray-700"
             name="oldPassword"
             value={formData.oldPassword}
             onChange={(e) =>
@@ -73,7 +73,7 @@ const {isLoading,isSuccess , isError,message}=useSelector((state)=>state.auth)
           <input
             type="password"
             placeholder="Enter new Password"
-            className="text-white placeholder-body-text-color"
+            className="text-black placeholder:text-gray-700"
             name="newPassword"
             value={formData.newPassword}
             onChange={(e) =>
@@ -85,7 +85,7 @@ const {isLoading,isSuccess , isError,message}=useSelector((state)=>state.auth)
 
         <button
           type="submit"
-          className="rounded-xl px-4 py-3 text-white cursor-pointer font-bold tracking-wide w-fit bg-color-danger hover:bg-theme-color transition-all"
+          className="rounded-xl px-4 py-3 text-black cursor-pointer font-bold tracking-wide w-fit bg-gray-200 border-2 border-black hover:bg-black hover:text-white transition-all"
         >
           Change Password
         </button>

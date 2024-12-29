@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import CountDownTimer from "../components/CountDownTimer";
 import { useState } from "react";
-import { RiShoppingBagFill } from "react-icons/ri";
 import { BsCurrencyDollar } from "react-icons/bs";
 import socket from "../socket";
 // eslint-disable-next-line react/prop-types
+
 const SingleAuction = ({
   name,
   startingPrice,
@@ -36,7 +36,7 @@ const SingleAuction = ({
       <div>
         <div className="w-full rounded-md relative bg-gray-300 overflow-hidden ">
           <img
-            className="w-full sm:h-[300px] rounded-md object-contain hover:scale-105 transition-all duration-300  "
+            className="w-full sm:h-[300px] rounded-md object-cover hover:scale-105 transition-all duration-300  "
             src={image}
             alt="item image"
           />
@@ -67,10 +67,6 @@ const SingleAuction = ({
         {/* show the winner of auction */}
         {statusData === "over" ? (
           <div className="flex justify-between item-center my-2 border-t border-border-info-color ">
-            {/* <div className="flex flex-col ">
-              <p className="text-[12px]">Current Bid</p>
-              <p className="mt-2">$ {startingPrice}</p>
-            </div> */}
             <Link
               to={`/single-auction-detail/${id}`}
               className=" bg-black hover:bg-pink-500 text-white text-sm font-bold rounded-md my-auto  py-2 w-full  text-center no-underline mt-3"
@@ -82,15 +78,15 @@ const SingleAuction = ({
           <div className="flex justify-between item-center my-2 border-t border-border-info-color py-1">
             <div className="flex flex-col ">
               <p className="text-[12px] text-black">Current Bid</p>
-              <p className="mt-2 text-black">$ {startingPrice}</p>
+              <p className="mt-2 text-black">₹ {startingPrice}</p>
             </div>
             <Link
               to={`/single-auction-detail/${id}`}
-              className={` flex items-center gap-1 text-white text-sm font-bold  rounded-md my-auto px-3 py-2  text-center no-underline
+              className={`flex items-center gap-1 text-black text-sm font-bold  rounded-md my-auto px-3 py-2  text-center no-underline
             ${
               sellerId === logInUser?._id
-                ? "bg-gray-800 text-white border border-border-info-color "
-                : "bg-black border cursor-pointer border-border-info-color hover:bg-pink-500 hover:text-black transition-all"
+                ? "bg-gray-200 text-black border border-black hover:bg-black hover:text-white transition-all"
+                : "bg-gray-200 text-black border cursor-pointer border-black hover:bg-black hover:text-white transition-all"
             }`}
             >
               {" "}

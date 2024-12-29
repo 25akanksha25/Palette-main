@@ -23,17 +23,17 @@ const ProfileComponent = () => {
     <>
       <div className="flex flex-col gap-4 w-full">
         <div className="flex min-h-[400px] flex-wrap gap-4 lg:flex-nowrap">
-          <div className="px-7 py-4 w-full bg-theme-bg text-white rounded-2xl">
-            <div className="font-bold flex justify-between items-center border-b border-border-info-color pb-3 mb-5 ">
+          <div className="px-7 py-4 w-full bg-gray-300 border border-black text-black rounded-2xl">
+            <div className="font-bold flex justify-between items-center border-b border-black pb-3 mb-5 ">
               <h2 className="text-xl ">Personal Info</h2>
-              <Link
+              {/* <Link
                 to="/user-profile/account-settings"
                 className=" flex items-center gap-1 px-4 py-2 bg-theme-color hover:bg-color-danger rounded-xl"
               >
                 <FaRegEdit size={16} /> <span>Edit</span>
-              </Link>
+              </Link> */}
             </div>
-            <ul className="flex flex-col gap-3 font-medium text-body-text-color">
+            <ul className="flex flex-col gap-3 font-medium text-black">
               <li>
                 Name:{" "}
                 <span className="float-right font-normal">
@@ -85,17 +85,17 @@ const ProfileComponent = () => {
               </li>
             </ul>
           </div>
-          <div className="px-7 py-4 w-full bg-theme-bg text-white rounded-2xl">
-            <div className="font-bold flex justify-between items-center border-b border-border-info-color pb-3 mb-5 ">
+          <div className="px-7 py-4 w-full bg-gray-300 border border-black text-black rounded-2xl">
+            <div className="font-bold flex justify-between items-center border-b border-black pb-3 mb-5 ">
               <h2 className="text-xl ">Your Bio</h2>
-              <Link
+              {/* <Link
                 to="/user-profile/account-settings"
                 className=" flex items-center gap-1 px-4 py-2 bg-theme-color hover:bg-color-danger rounded-xl"
               >
                 <FaRegEdit size={16} /> <span>Edit</span>
-              </Link>
+              </Link> */}
             </div>
-            <p className="text-body-text-color">
+            <p className="text-black">
               {singleUser?.description
                 ? singleUser.description
                 : "No bio available"}

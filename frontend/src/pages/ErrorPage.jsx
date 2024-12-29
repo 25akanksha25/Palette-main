@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import errorimg from "../assets/error.png";
+
 const ErrorPage = () => {
   return (
     <>
@@ -15,7 +16,7 @@ const ErrorPage = () => {
         </div>
         <Link
           to="/"
-          className="font-Roboto text-lg mx-3 rounded-xl px-4 py-3 cursor-pointer font-bold tracking-wide  bg-theme-color hover:bg-color-danger transition-all"
+          className="font-Roboto text-lg mx-3  rounded-xl px-4 py-3 cursor-pointer font-bold tracking-wide text-black bg-white border-2 border-black hover:bg-black hover:text-white transition-all"
         >
           Go To Home
         </Link>
