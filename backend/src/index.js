@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 import { app } from "./app.js"
 import connectDB from './db/index.js';
 import http from "http";
@@ -16,9 +16,9 @@ const io = new Server(server, {
   }
 });
 
-dotenv.config({
-  path:"./env"
-})
+// dotenv.config({
+//   path:"./env"
+// })
 
 
 app.use(emailRoutes);
@@ -26,7 +26,7 @@ app.use(emailRoutes);
 connectDB()
 .then(
   server.listen(8000, () => {
-    console.log(`server is running at port ${process.env.PORT}`)
+    console.log('server is running at port 8000')
   })
 )
 
