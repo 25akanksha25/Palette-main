@@ -20,7 +20,7 @@ const AboutUs = () => {
         {/* About Us Section */}
         <div className="flex items-center gap-12 flex-wrap lg:flex-nowrap">
           <img
-            className="min-w-[700px] h-[500px] object-cover rounded-lg"
+            className="min-w-[600px] h-[500px] object-cover rounded-lg"
             src={aboutimg}
             alt="about us"
           />
@@ -94,7 +94,7 @@ const AboutUs = () => {
             <img
               src={mapimg}
               alt="Global Reach Map"
-              className="w-full min-w-[900px] h-[500px] object-contain rounded-lg shadow-lg"
+              className="w-full min-w-[800px] h-[500px] object-contain rounded-lg shadow-lg"
             />
           </div>
         </div>
