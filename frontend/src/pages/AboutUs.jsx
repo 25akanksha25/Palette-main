@@ -94,7 +94,7 @@ const AboutUs = () => {
             <img
               src={mapimg}
               alt="Global Reach Map"
-              className="w-full min-w-[900px] h-[500px] object-contain rounded-lg shadow-lg"
+              className="w-full min-w-[800px] h-[500px] object-contain rounded-lg shadow-lg"
             />
           </div>
         </div>
