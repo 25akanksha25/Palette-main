@@ -19,7 +19,7 @@ const ContactUs = () => {
     e.preventDefault();
 
     const formData = new FormData(form.current);
-    const formObject = Object.fromEntries(formData.entries()); // Convert FormData to an object
+    const formObject = Object.fromEntries(formData.entries()); 
 
     try {
       // Send email via backend API

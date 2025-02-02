@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { artworks } from './artdata'; // Importing the data
+import { artworks } from './artdata'; 
 
 const ArtWorks = () => {
   return (

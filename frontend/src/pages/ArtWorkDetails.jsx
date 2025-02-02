@@ -22,7 +22,7 @@ const ArtworkDetails = () => {
             src={artwork.image}
             alt={artwork.title}
             className="w-full object-cover rounded-lg shadow-lg"
-            style={{ maxWidth: '900px', height: '800px' }} // Adjusted width and height for image
+            style={{ maxWidth: '900px', height: '800px' }} 
           />
         </div>
 
@@ -32,8 +32,8 @@ const ArtworkDetails = () => {
             <h3 className="text-3xl font-semibold text-black mt-2">{artwork.artist}</h3>
           </div>
 
-          <p className="text-xl text-black mt-4 italic">"{artwork.quote}"</p> {/* Added quote */}
-          <p className="text-xl text-gray-600 mt-2">{artwork.description}</p> {/* Description */}
+          <p className="text-xl text-black mt-4 italic">"{artwork.quote}"</p> 
+          <p className="text-xl text-gray-600 mt-2">{artwork.description}</p> 
 
           <div className="mt-6">
             <p className="text-xl text-black"><strong>Medium:</strong> {artwork.medium}</p>
