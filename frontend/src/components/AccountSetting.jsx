@@ -45,10 +45,11 @@ const AccountSetting = () => {
     }
   
     // Check if phone is a valid number (10 digits, for example)
-    if (!/^\d{10}$/.test(formData.phone)) {
-      errors.push("Phone number must be 10 digits.");
+    if (formData.phone !== undefined && formData.phone !== "") {
+      if (!/^\d{10}$/.test(formData.phone)) {
+        errors.push("Phone number must be exactly 10 digits.");
+      }
     }
-  
     return errors;
   };
 
@@ -149,7 +150,6 @@ const AccountSetting = () => {
                 setFormData({ ...formData, email: e.target.value })
               }
             />{" "}
-            {/* {select field} */}
             <select
               className="outline-none bg-gray-300 rounded-xl px-3 py-4 cursor-pointer text-gray-700"
               value={formData.gender}

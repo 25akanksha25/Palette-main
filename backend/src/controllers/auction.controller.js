@@ -179,9 +179,6 @@ const getAllAuctions = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Get a single Auction by ID
-// @route GET /api/v1/auctions/:id
-// @access Public
 
 const getSingleAuctionById = asyncHandler(async (req, res) => {
   try {
@@ -562,6 +559,8 @@ const getUpcomingAuctions = asyncHandler(async (req, res) => {
       .json(new ApiResponse(500, error?.message || "Internal server error"));
   }
 });
+
+
 
 
 export {

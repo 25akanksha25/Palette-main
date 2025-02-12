@@ -14,7 +14,6 @@ import contacthead from "../assets/contact-head.png"
 const ContactUs = () => {
   const form = useRef();
 
-  // Function to send email using backend API
   const sendEmail = async (e) => {
     e.preventDefault();
 
@@ -22,12 +21,11 @@ const ContactUs = () => {
     const formObject = Object.fromEntries(formData.entries()); 
 
     try {
-      // Send email via backend API
       await axios.post('http://localhost:8000/contact/send-email', formObject);
       toast.success('Email sent successfully.', {
-        autoClose: 1000, // Customize the duration of the success toast
+        autoClose: 1000, 
       });
-      form.current.reset(); // Reset the form after successful submission
+      form.current.reset(); 
     } catch (error) {
       console.error(error);
       toast.error('Error sending email. Please try again.', {
@@ -38,14 +36,13 @@ const ContactUs = () => {
 
   return (
     <>
-    <div className="relative">
-  <img
-    src={contacthead} // Replace this with your desired banner image path
-    alt="About Us Banner"
-    className="w-full h-[350px] object-cover"
-  />
-</div>
-    
+      <div className="relative">
+        <img
+          src={contacthead} 
+          alt="Contactus Banner"
+          className="w-full h-[350px] object-cover"
+        />
+      </div>
       <div className="max-w-[1000px] m-auto px-5 py-20 flex flex-col gap-20">
         <div className="grid grid-cols-1 m-auto gap-5 w-full max-w-[1000px] md:grid-cols-3">
           <div className="text-xl flex flex-col gap-4 items-center justify-start p-8 rounded-2xl bg-gray-500 text-white w-full">

@@ -136,7 +136,7 @@ const Sidebar = () => {
               Notifications
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
                 activeLink === "/user-profile/account-settings"
@@ -146,18 +146,18 @@ const Sidebar = () => {
               to="/user-profile/account-settings"
               onClick={() => handleLinkClick("/user-profile/account-settings")}
             >
-              {/* <IoMdSettings
+              <IoMdSettings
                 size={18}
                 className={`text-theme-color transition-all duration-500 ${
                   activeLink === "/user-profile/account-settings"
                     ? " text-white"
                     : ""
                 }`}
-              /> */}
+              /> 
               <IoMdSettings size={18} className="text-black" />
               Account Settings
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
