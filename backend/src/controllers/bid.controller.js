@@ -12,14 +12,6 @@ const addBidOnItem = asyncHandler(async (req, res) => {
       return res.status(400).json(new ApiResponse(400, "Invalid bid amount"));
     }
 
-    const MAX_BID_AMOUNT = 1000000; // Limit set to 1 million
-
-    if (amount > MAX_BID_AMOUNT) {
-      return res
-        .status(400)
-        .json(new ApiResponse(400, `Bid amount cannot exceed ${MAX_BID_AMOUNT}`));
-    }
-
     console.log(amount, "amount");
 
     let item = await Auction.findById(req.params.id);
