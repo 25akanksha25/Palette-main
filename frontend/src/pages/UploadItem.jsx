@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getAllAuctions } from "../store/auction/auctionSlice";
 import { IoCloudUploadOutline } from "react-icons/io5";
+import uploadBanner from "../assets/upload-banner.png";
+
 
 const UploadItem = () => {
   const dispatch = useDispatch();
@@ -96,6 +98,15 @@ const UploadItem = () => {
 
   return (
     <div>
+      <div className="m-2">
+        <div className="bg-white p-2">
+          {/* <p className="text-xl text-black">
+            Going once, going twice… SOLD! This page uploads your artwork for auction. 
+            If you’d rather list it for direct purchase, visit the Artwork page.
+          </p> */}
+          <img src={uploadBanner} className="w-full h-[250px]"/>
+        </div>
+      </div>
       <form
         className="flex flex-col lg:flex-row gap-8 justify-center md:w-[80%] lg:w-[100%] m-auto px-4 py-20"
         onSubmit={handleProductUpload}

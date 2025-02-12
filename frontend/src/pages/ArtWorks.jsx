@@ -5,7 +5,7 @@ import { artworks } from './artdata';
 
 const ArtWorks = () => {
   return (
-    <div className="bg-white ml-6 p-6">
+    <div className="bg-white ml-6 p-6 min-h-screen">
       <h1 className="text-4xl text-black">Collect Art</h1>
       <div className="grid grid-cols-3 gap-6 mt-12">
         {artworks.map((artwork) => (
