@@ -25,8 +25,8 @@ app.use(emailRoutes);
 
 connectDB()
 .then(
-  server.listen(8000, () => {
-    console.log('server is running at port 8000')
+  server.listen(8010, () => {
+    console.log('server is running at port 8010')
   })
 )
 
