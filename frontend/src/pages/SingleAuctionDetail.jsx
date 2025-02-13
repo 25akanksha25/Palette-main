@@ -360,10 +360,22 @@ const SingleAuctionDetail = ({ noPadding }) => {
                   {/* input button for bid */}
                   <input
                     type="number"
-                    className="outline-none text-black placeholder:text-white px-3 py-4 rounded-xl bg-gray-400 border border-border-info-color  transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    className="outline-none text-black placeholder:text-white px-3 py-4 rounded-xl bg-gray-400 border border-border-info-color transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     placeholder="Enter your bid"
                     value={newBidAmount}
-                    onChange={(e) => setNewBidAmount(e.target.value)}
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
+
+                      // Check if the input exceeds 1 lakh
+                      if (value > 100000) {
+                        toast.error("Bid amount cannot exceed 1 lakh!", {
+                        });
+
+                        return; 
+                      }
+                      // If valid, update the state
+                      setNewBidAmount(value || ""); 
+                    }}
                     required
                   />
                   {logInUser ? (
