@@ -61,10 +61,10 @@ const createAuction = asyncHandler(async (req, res) => {
         .json(new ApiResponse(400, "Starting price must be a positive number"));
     }
 
-    if (startingPrice >= 1000000000000) {
+    if (startingPrice >= 1000000) {
       return res
         .status(400)
-        .json(new ApiResponse(400, "Starting price cannot exceed 1 trillion"));
+        .json(new ApiResponse(400, "Starting price cannot exceed 10 lakh"));
     }
 
     const imgUrlCloudinary = await uploadOnCloudinary(image);

@@ -366,9 +366,9 @@ const SingleAuctionDetail = ({ noPadding }) => {
                     onChange={(e) => {
                       const value = Number(e.target.value);
 
-                      // Check if the input exceeds 1 lakh
-                      if (value > 100000) {
-                        toast.error("Bid amount cannot exceed 1 lakh!", {
+                      // Check if the input exceeds 1 trillion
+                      if (value > 1000000000000) {
+                        toast.error("Bid amount cannot exceed 1 trillion!", {
                         });
 
                         return; 
