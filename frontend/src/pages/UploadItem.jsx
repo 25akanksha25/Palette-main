@@ -144,11 +144,33 @@ const UploadItem = () => {
 
           <input
             type="file"
-            className="hidden"
-            onChange={(e) => setImgUrl(URL.createObjectURL(e.target.files[0]))}
             ref={imgRef}
-            accept=".png, .jpg, .jpeg"
+            className="hidden"
+            accept="image/png, image/jpeg, image/jpg"
+            onChange={(e) => {
+              const file = e.target.files[0];
+
+              if (file) {
+                const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
+
+                // Check if file type is valid
+                if (!allowedTypes.includes(file.type)) {
+                  toast.error("Only PNG, JPG, and JPEG files are allowed!", {
+                  });
+                  e.target.value = ""; 
+                  return;
+                }
+
+                // Set the image URL to preview
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                  setImgUrl(event.target.result);
+                };
+                reader.readAsDataURL(file);
+              }
+            }}
           />
+
         </div>
         {/* INPUTS */}
         <div className="flex flex-col gap-4 lg:w-[50%] bg-gray-300 inputs:outline-none p-8 inputs:px-4 inputs:py-3 inputs:rounded-xl select:px-4 select:py-3 select:rounded-xl select:cursor-pointer border border-gray-700 inputs:bg-gray-200 inputs:border select:border select:border-border-info-color inputs:placeholder:text-gray-700 text-gray-700 rounded-2xl [&label]:mb-2 [&_label]:text-black [&*]:transition-all">
