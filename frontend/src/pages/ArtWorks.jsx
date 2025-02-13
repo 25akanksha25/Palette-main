@@ -4,9 +4,22 @@ import { Link } from 'react-router-dom';
 import { artworks } from './artdata'; 
 
 const ArtWorks = () => {
+
+  const logInUser = JSON.parse(localStorage.getItem("user"));
+
   return (
     <div className="bg-white ml-6 p-6 min-h-screen">
-      <h1 className="text-4xl text-black">Collect Art</h1>
+      <div className="flex flex-row justify-between items-center">
+        <h1 className="text-4xl text-black">Collect Art</h1>
+        <Link>
+          <button 
+            className="border-2 border-black p-3 rounded-xl text-lg text-black hover:text-white hover:bg-black"
+            to={logInUser ? "/purchaseartwork" : "/login"}
+          >
+            Upload Art Piece
+          </button>
+        </Link>
+      </div>
       <div className="grid grid-cols-3 gap-6 mt-12">
         {artworks.map((artwork) => (
           <Link key={artwork.id} to={`/artwork/${artwork.id}`}>
