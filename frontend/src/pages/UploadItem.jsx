@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getAllAuctions } from "../store/auction/auctionSlice";
 import { IoCloudUploadOutline } from "react-icons/io5";
-import uploadBanner from "../assets/upload-banner.png";
+import uploadBanner from "../assets/upload-banner2.png";
 
 
 const UploadItem = () => {
