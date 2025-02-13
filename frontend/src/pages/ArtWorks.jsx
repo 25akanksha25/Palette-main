@@ -9,12 +9,14 @@ const ArtWorks = () => {
 
   return (
     <div className="bg-white ml-6 p-6 min-h-screen">
+      <div>
+        <h1>Header img</h1>
+      </div>
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-4xl text-black">Collect Art</h1>
-        <Link>
+        <Link to={logInUser ? "/purchaseartwork" : "/login"}>
           <button 
             className="border-2 border-black p-3 rounded-xl text-lg text-black hover:text-white hover:bg-black"
-            to={logInUser ? "/purchaseartwork" : "/login"}
           >
             Upload Art Piece
           </button>
