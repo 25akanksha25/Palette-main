@@ -24,6 +24,8 @@ import AdminFooter from "./admin/components/Footer"
 import AdminHeader from "./admin/components/Header"
 import AdminDashboard from "./admin/Admin"
 import PurchaseArtWork from "./pages/PurchaseArtWork";
+import EventPage from "./pages/EventPage";
+
 
 
 const App = () => {
@@ -44,6 +46,8 @@ console.log(user,"...")
           <Route path="/artwork/:artworkId" element={<ArtworkDetails />} />
           <Route path="/viewroom" element={<ViewRoom/>} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/galleries" element={<EventPage/>} />
+
           <Route
             path="/single-auction-detail/:id"
             element={<SingleAuctionDetail />}
