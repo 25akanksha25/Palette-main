@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { artworks } from './artdata'; // Importing the data
 
 
 

@@ -23,9 +23,13 @@ import { useSelector } from "react-redux";
 import AdminFooter from "./admin/components/Footer"
 import AdminHeader from "./admin/components/Header"
 import AdminDashboard from "./admin/Admin"
+<<<<<<< HEAD
 import PurchaseArtWork from "./pages/PurchaseArtWork";
 import EventPage from "./pages/EventPage";
 
+=======
+import UploadArtwork from "./pages/UploadArtwork";
+>>>>>>> e5c1fae06ddfdb4ae86461825f1f301e7c75dec9
 
 
 const App = () => {
@@ -68,9 +72,9 @@ console.log(user,"...")
           <Route element={<Protected />}>
             <Route path="/user-profile/*" element={<UserProfile />} />
             <Route path="/edit-auction/:id" element={<EditAuction />} />
-            <Route path="/purchaseartwork" element={<PurchaseArtWork/>} />
             <Route element={<SellerRoutes />}>
               <Route path="/create-auction" element={<UploadItem />} />
+              <Route path="/create-artwork" element={<UploadArtwork/>} />
             </Route>
            
           </Route>
