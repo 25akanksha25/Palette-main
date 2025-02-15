@@ -23,7 +23,7 @@ import { useSelector } from "react-redux";
 import AdminFooter from "./admin/components/Footer"
 import AdminHeader from "./admin/components/Header"
 import AdminDashboard from "./admin/Admin"
-import PurchaseArtWork from "./pages/PurchaseArtWork";
+import UploadArtwork from "./pages/UploadArtwork";
 
 
 const App = () => {
@@ -64,9 +64,9 @@ console.log(user,"...")
           <Route element={<Protected />}>
             <Route path="/user-profile/*" element={<UserProfile />} />
             <Route path="/edit-auction/:id" element={<EditAuction />} />
-            <Route path="/purchaseartwork" element={<PurchaseArtWork/>} />
             <Route element={<SellerRoutes />}>
               <Route path="/create-auction" element={<UploadItem />} />
+              <Route path="/create-artwork" element={<UploadArtwork/>} />
             </Route>
            
           </Route>

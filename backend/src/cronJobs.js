@@ -116,7 +116,7 @@ changeStream.on('change', (change) => {
   try{
     if (change.operationType === 'insert') {
       const auction = change.fullDocument;
-  console.log("cronjobs,,,,,,,,,,,,,,,, are herer");
+      // console.log("cronjobs,,,,,,,,,,,,,,,, are herer");
       // Schedule cron jobs for the new auction
       const startCronExpression = moment(auction.startTime).format('m H D M *');
       const endCronExpression = moment(auction.endTime).format('m H D M *');
