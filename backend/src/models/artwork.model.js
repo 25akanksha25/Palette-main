@@ -16,6 +16,7 @@ const artworkSchema = new mongoose.Schema({
     type:Boolean,
     default:false
   },
+  // add dimentions , aditional info , image array
 }, 
 {
   timestamps: true,
