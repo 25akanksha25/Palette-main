@@ -45,7 +45,7 @@ const ArtWorks = () => {
         )}
       </div>
 
-      <div className="grid grid-cols-3 gap-6 mt-12">
+      <div className="grid grid-cols-4 gap-6 mt-12">
         {availableArtworks.length > 0 ? (
           availableArtworks.map((artwork) => (
             <Link key={artwork._id} to={`/artwork/${artwork._id}`}>
@@ -64,19 +64,21 @@ const ArtWorks = () => {
                   </h3>
                   <p className="text-sm text-gray-600">{artwork.description}</p>
                   <div className="flex gap-2 mt-2">
-                    {Array.isArray(artwork.category) &&
-                      artwork.category.map((cat, index) => (
-                        <span
-                          key={index}
-                          className="bg-gray-200 text-gray-700 px-2 py-1 text-sm rounded-full"
-                        >
-                          {cat.name}
-                        </span>
-                      ))}
+                    <span className="bg-gray-200 text-gray-700 px-2 py-1 text-sm rounded-full">
+                      {artwork.category?.name}
+                    </span>
+                    <span className="bg-gray-200 text-gray-700 px-2 py-1 text-sm rounded-full">
+                      {artwork.location?.name}
+                    </span>
                   </div>
-                  <p className="text-lg text-black mt-4 font-bold">
-                    Rs{artwork.price}
-                  </p>
+                  <div className="grid grid-cols-2 gap-2 mt-2">
+                    <p className="text-lg text-black mt-4 font-bold">
+                      Rs{artwork.price}
+                    </p>
+                    <button className="border-2 border-black rounded p-2 text-black hover:bg-black hover:text-white">
+                      Purchase
+                    </button>
+                  </div>
                 </div>
               </div>
             </Link>
