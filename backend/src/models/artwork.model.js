@@ -18,6 +18,7 @@ const artworkSchema = new mongoose.Schema(
       height: { type: Number, required: true },
       depth: { type: Number }
     },
+    additionalInfo:{type: String},
     price: { type: Number, required: true },
     paid: {
       type: Boolean,
