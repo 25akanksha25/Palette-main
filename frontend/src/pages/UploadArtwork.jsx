@@ -33,6 +33,9 @@ const UploadArtwork = () => {
     location: "",
     price: "",
     description: "",
+    width: "", 
+    height: "", 
+    depth: "",
   });
 
   useEffect(() => {
@@ -54,6 +57,9 @@ const UploadArtwork = () => {
         location: "",
         price: "",
         description: "",
+        width: "", 
+        height: "", 
+        depth: "" ,
       });
       setImgUrl("");
     }
@@ -63,13 +69,25 @@ const UploadArtwork = () => {
   const handleProductUpload = async (e) => {
     e.preventDefault();
     //image data so use new formdata
+
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!nameRegex.test(formData.name)) {
+      toast.error("Invalid name! Only alphabets and spaces are allowed.");
+      return;
+    }
+    
     const data = new FormData();
-    ////console.log(formData);
+    console.log(formData);
+
     data.append("name", formData.name);
     data.append("price", formData.price);
     data.append("category", formData.category);
     data.append("location", formData.location);
     data.append("description", formData.description);
+    data.append("width", formData.width);
+    data.append("height", formData.height);
+    data.append("depth", formData.depth || 0);
+
 
     if (!imgRef.current.files[0]) {
       return alert("Image is required");
@@ -189,6 +207,32 @@ const UploadArtwork = () => {
                   </option>
                 ))}
             </select>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-4 mlg:grid-cols-1">
+            <div className="grid">
+              <label htmlFor="dimensions">Dimensions</label>
+              <div className="grid grid-cols-3 gap-2 ">
+                <input type="number" id="width" 
+                  value={formData.width} 
+                  onChange={(e) =>
+                    setFormData({ ...formData, width: e.target.value })
+                  }
+                  placeholder="Width (cm)" required />
+                <input type="number" id="height" 
+                  value={formData.height} 
+                  onChange={(e) =>
+                    setFormData({ ...formData, height: e.target.value })
+                  }
+                  placeholder="Height (cm)" required />
+                <input type="number" id="depth"
+                  value={formData.depth} 
+                  onChange={(e) =>
+                    setFormData({ ...formData, depth: e.target.value })
+                  }
+                  placeholder="Depth (cm)" />
+              </div>
+            </div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-4 mlg:grid-cols-1">

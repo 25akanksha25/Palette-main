@@ -99,6 +99,26 @@ const Sidebar = ({ closeNavbar }) => {
 
           <li>
             <Link
+              className={`flex items-center gap-2  py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-gray-500 transition-all duration-500 ${
+                activeLink === "/admin/artworks"
+                  ? "bg-gray-400"
+                  : "text-black"
+              }`}
+              to="/admin/artworks"
+              onClick={() => handleLinkClick("/admin/artworks")}
+            >
+              <RiAuctionFill
+                size={16}
+                className={`text-black transition-all duration-500 ${
+                  activeLink === "/admin/artworks" ? " text-black" : ""
+                }`}
+              />
+              Artworks
+            </Link>
+          </li>
+
+          <li>
+            <Link
               className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-gray-500 transition-all duration-500 ${
                 activeLink === "/admin/categories"
                   ? "bg-gray-400 "

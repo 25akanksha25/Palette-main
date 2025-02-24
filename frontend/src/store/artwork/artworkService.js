@@ -48,7 +48,7 @@ const getSingleArtworkById = async (id) => {
 
 const deleteArtworkById = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/artwork/delete/${id}`, {
+    const response = await axios.delete(`${API_URL}/artwork/admin-delete/${id}`, {
       withCredentials: true,
     });
     //console.log("response deleteSingleAuctionById", response.data);
@@ -61,19 +61,18 @@ const deleteArtworkById = async (id) => {
   }
 };
 
-const purchaseArtwork=async(data)=>{
-    //console.log(data.data, "data purchaseArtwork");
-
-    try{
-        const response = await axios.put(`${API_URL}/artwork/purchase/${data.id}`,data.data, {withCredentials:true});
-        //console.log("response purchaseArtwork", response.data);
-        return response.data;
-    }catch(error){
-        const message = (error.response && error.response.data.message) || error.message;
-        //console.error("Error with purchaseArtwork", error);
-        return {message, isError:true};
-    }
-}
+const purchaseArtwork = async ({ id, paymentData }) => {
+  try {
+    const response = await axios.put(
+      `${API_URL}/artwork/purchase/${id}`,
+      paymentData, // Ensure this is correctly structured
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (error) {
+    return handleError(error);
+  }
+};
 
 
 

@@ -65,7 +65,7 @@ const Cart = () => {
         },
         notes: notes,
         theme: {
-          color: "#F37254",
+          color: "#121212",
         },
       };
 

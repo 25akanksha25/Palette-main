@@ -13,10 +13,14 @@ const createArtwork = asyncHandler(async (req, res) => {
       category,
       price,
       location,
-      dimensions,
+      width,
+      height,
+      depth
     } = req.body;
+    const image = req.file?.path;
 
-    if (!name || !description || !category || !price || !location || !dimensions) {
+
+    if (!name || !description || !category || !price || !location || !width || !height) {
       return res.status(400).json(new ApiResponse(400, "All fields are required"));
     }
 
@@ -24,25 +28,14 @@ const createArtwork = asyncHandler(async (req, res) => {
       return res.status(400).json(new ApiResponse(400, "Price must be between 1 and 10 lakh"));
     }
 
-    // Parse dimensions
-    const parsedDimensions = JSON.parse(dimensions);
-    if (!parsedDimensions.width || !parsedDimensions.height) {
-      return res.status(400).json(new ApiResponse(400, "Width and Height are required in dimensions"));
-    }
-
     // Handle multiple image uploads
-    let imageUrls = [];
-    if (req.files && req.files.length > 0) {
-      for (let file of req.files) {
-        const uploadedImage = await uploadOnCloudinary(file.path);
-        if (uploadedImage) {
-          imageUrls.push(uploadedImage.url);
-        }
-      }
-    }
+    const imgUrlCloudinary = await uploadOnCloudinary(image);
+    // console.log("Cloudinary response:", imgUrlCloudinary);
 
-    if (imageUrls.length === 0) {
-      return res.status(400).json(new ApiResponse(400, "At least one image is required"));
+    if (!imgUrlCloudinary) {
+      return res
+        .status(500)
+        .json(new ApiResponse(500, "Error uploading image"));
     }
 
     const artwork = await Artwork.create({
@@ -51,8 +44,10 @@ const createArtwork = asyncHandler(async (req, res) => {
       category,
       seller: req.user._id,
       location,
-      image: imageUrls,
-      dimensions: parsedDimensions,
+      image: imgUrlCloudinary.url,
+      width,
+      height,
+      depth,
       price,
       status: "available",
     });
@@ -105,13 +100,13 @@ const deleteArtworkById = asyncHandler(async (req, res) => {
       return res.status(404).json(new ApiResponse(404, "Artwork not found"));
     }
 
-    if (artwork.seller.toString() !== req.user._id.toString()) {
-      return res.status(403).json(new ApiResponse(403, "Unauthorized to delete this artwork"));
-    }
+    // if (artwork.seller.toString() !== req.user._id.toString()) {
+    //   return res.status(403).json(new ApiResponse(403, "Unauthorized to delete this artwork"));
+    // }
 
-    await Artwork.deleteOne({ _id: req.params.id });
+    const deletedArtwork = await Artwork.deleteOne({ _id: req.params.id });
 
-    return res.json(new ApiResponse(200, "Artwork deleted successfully"));
+    return res.json(new ApiResponse(200, "Artwork deleted successfully", deletedArtwork));
   } catch (error) {
     return res.status(500).json(new ApiResponse(500, error.message || "Internal server error"));
   }
@@ -119,6 +114,12 @@ const deleteArtworkById = asyncHandler(async (req, res) => {
 
 const purchaseArtwork = asyncHandler(async (req, res) => {
   try {
+    const { paymentId, userId } = req.body;
+
+    if (!paymentId) {
+      return res.status(400).json(new ApiResponse(400, "Payment ID is required"));
+    }
+
     const artwork = await Artwork.findById(req.params.id);
 
     if (!artwork) {
@@ -129,8 +130,10 @@ const purchaseArtwork = asyncHandler(async (req, res) => {
       return res.status(400).json(new ApiResponse(400, "Artwork is already sold"));
     }
 
-    // Mark as sold
+    // Update artwork status
     artwork.status = "sold";
+    artwork.paid = true;
+    artwork.buyer = userId;
     await artwork.save();
 
     return res.json(new ApiResponse(200, "Artwork purchased successfully", { artwork }));
@@ -138,6 +141,8 @@ const purchaseArtwork = asyncHandler(async (req, res) => {
     return res.status(500).json(new ApiResponse(500, error.message || "Internal server error"));
   }
 });
+
+
 
 export {
   createArtwork,
