@@ -18,7 +18,7 @@ const Home = () => {
         <LiveHome />
         <UpcommingHome />
         <ProcessHome />
-        <ArtworkSlider/>
+        {/* <ArtworkSlider/> */}
         <Editorial/>
         <div className="text-white flex flex-col gap-8">
           <CreateEarnHome />
