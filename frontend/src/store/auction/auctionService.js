@@ -70,7 +70,7 @@ const selectAuctionWinner = async (data) => {
   try {
     //console.log("data selectAuctionWinner", data);
     const response = await axios.get(
-      `http://localhost:8000/api/v1/bids/${data.id}/winner`
+      `http://localhost:8010/api/v1/bids/${data.id}/winner`
     );
     //console.log("response selectAuctionWinner", response.data);
     return response.data;

@@ -17,55 +17,175 @@ async function updateAuctionStatus(auctionId, status) {
   await auction.save();
 }
 
+// async function selectAuctionWinner(auctionId) {
+//   console.log("selecting auction winner in cronJobs,,,,,,,,,,");
+//   io.emit("setStatus","auction ended.")
+//   const bids = await Bid.find({ auction: auctionId });
+//   console.log(bids, "auction.........");
+
+//  if(bids.length <= 0){
+//   return
+//  }
+
+//   let maxBidId = bids[0]._id;
+//   let maxAmount = bids[0].bidAmount;
+//   for (let i = 1; i < bids.length; i++) {
+//     if (bids[i].bidAmount > maxAmount) {
+//       maxAmount = bids[i].bidAmount;
+//       maxBidId = bids[i]._id;
+//     }
+//   }
+
+//   const auction = await Auction.findById(auctionId);
+//   const winnerUser = await Bid.findById(maxBidId).populate(
+//     "bidder",
+//     "_id fullName email phone profilePicture"
+//   );
+
+//   console.log(winnerUser, "winnerUser");
+
+//   auction.winner = maxBidId;
+//   auction.status = "over";
+
+//   await auction.save();
+
+//   await sendNotification(winnerUser,auction )
+  
+
+// //first find the  user in cart then add item to that cart
+//   const userCart=await Cart.findOne({user:winnerUser.bidder._id});
+//   if(!userCart){
+//       await Cart.create({products:[auction._id],user:winnerUser.bidder._id});
+//   }else{
+//       userCart.products.push(auction._id);
+//       await userCart.save();
+//   }
+
+//   console.log(cartItem);
+  
+  
+
+// }
+
+// async function selectAuctionWinner(auctionId) {
+//   console.log("selecting auction winner in cronJobs,,,,,,,,,,");
+//   io.emit("setStatus", "auction ended.");
+//   const bids = await Bid.find({ auction: auctionId }).sort({ bidAmount: -1 }); // Sorting by bidAmount descending
+
+//   console.log(bids, "auction.........");
+
+//   if (bids.length <= 0) {
+//     return;
+//   }
+
+//   let maxBidId = bids[0]._id;
+//   let maxAmount = bids[0].bidAmount;
+
+//   // Check if the highest bidder has been deleted or is invalid
+//   let winnerUser = await Bid.findById(maxBidId).populate(
+//     "bidder",
+//     "_id fullName email phone profilePicture"
+//   );
+
+//   // If the highest bidder is deleted or invalid, check the next highest bid
+//   while (!winnerUser?.bidder || winnerUser?.bidder?.isDeleted) {
+//     console.log(`Highest bidder deleted or invalid, moving to next highest bid`);
+//     const nextBid = bids.find((bid) => bid._id.toString() !== maxBidId.toString());
+    
+//     if (nextBid) {
+//       maxBidId = nextBid._id;
+//       maxAmount = nextBid.bidAmount;
+//       winnerUser = await Bid.findById(maxBidId).populate(
+//         "bidder",
+//         "_id fullName email phone profilePicture"
+//       );
+//     } else {
+//       console.log("No valid bidders left");
+//       return;
+//     }
+//   }
+
+//   console.log(winnerUser, "winnerUser");
+
+//   const auction = await Auction.findById(auctionId);
+//   auction.winner = maxBidId;
+//   auction.status = "over";
+//   await auction.save();
+
+//   await sendNotification(winnerUser, auction);
+
+//   // Add the auction item to the winner's cart
+//   const userCart = await Cart.findOne({ user: winnerUser.bidder._id });
+//   if (!userCart) {
+//     await Cart.create({ products: [auction._id], user: winnerUser.bidder._id });
+//   } else {
+//     userCart.products.push(auction._id);
+//     await userCart.save();
+//   }
+
+//   console.log("Cart item added successfully!");
+// }
+
 async function selectAuctionWinner(auctionId) {
   console.log("selecting auction winner in cronJobs,,,,,,,,,,");
-  io.emit("setStatus","auction ended.")
-  const bids = await Bid.find({ auction: auctionId });
+  io.emit("setStatus", "auction ended.");
+  const bids = await Bid.find({ auction: auctionId }).sort({ bidAmount: -1 }); // Sorting by bidAmount descending
+
   console.log(bids, "auction.........");
 
- if(bids.length <= 0){
-  return
- }
+  if (bids.length <= 0) {
+    return;
+  }
 
   let maxBidId = bids[0]._id;
   let maxAmount = bids[0].bidAmount;
-  for (let i = 1; i < bids.length; i++) {
-    if (bids[i].bidAmount > maxAmount) {
-      maxAmount = bids[i].bidAmount;
-      maxBidId = bids[i]._id;
-    }
-  }
 
-  const auction = await Auction.findById(auctionId);
-  const winnerUser = await Bid.findById(maxBidId).populate(
+  // Check if the highest bidder has been deleted or is invalid
+  let winnerUser = await Bid.findById(maxBidId).populate(
     "bidder",
     "_id fullName email phone profilePicture"
   );
 
-  console.log(winnerUser, "winnerUser");
-
-  auction.winner = maxBidId;
-  auction.status = "over";
-
-  await auction.save();
-
-  await sendNotification(winnerUser,auction )
-  
-
-//first find the  user in cart then add item to that cart
-  const userCart=await Cart.findOne({user:winnerUser.bidder._id});
-  if(!userCart){
-      await Cart.create({products:[auction._id],user:winnerUser.bidder._id});
-  }else{
-      userCart.products.push(auction._id);
-      await userCart.save();
+  // If the highest bidder is deleted or invalid, check the next highest bid
+  while (!winnerUser?.bidder || winnerUser?.bidder?.isDeleted) {
+    console.log(`Highest bidder deleted or invalid, moving to next highest bid`);
+    const nextBid = bids.find((bid) => bid._id.toString() !== maxBidId.toString());
+    
+    if (nextBid) {
+      maxBidId = nextBid._id;
+      maxAmount = nextBid.bidAmount;
+      winnerUser = await Bid.findById(maxBidId).populate(
+        "bidder",
+        "_id fullName email phone profilePicture"
+      );
+    } else {
+      console.log("No valid bidders left");
+      return;
+    }
   }
 
-  console.log(cartItem);
-  
-  
+  console.log(winnerUser, "winnerUser");
 
+  const auction = await Auction.findById(auctionId);
+  auction.winner = maxBidId;
+  auction.status = "over";
+  await auction.save();
+
+  await sendNotification(winnerUser, auction);
+
+  // Add the auction item to the winner's cart
+  const userCart = await Cart.findOne({ user: winnerUser.bidder._id });
+  if (!userCart) {
+    await Cart.create({ products: [auction._id], user: winnerUser.bidder._id });
+  } else {
+    userCart.products.push(auction._id);
+    await userCart.save();
+  }
+
+  console.log("Cart item added successfully!");
 }
+
+
 
 async function sendNotification(winner, auction){
   console.log("sending notificaton to userin cornjosb,,,,,,,,,,,,");

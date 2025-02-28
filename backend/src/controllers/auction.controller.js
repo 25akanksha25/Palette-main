@@ -493,6 +493,57 @@ return res.status(200).json(new ApiResponse(200, "Auction winner retrieved succe
   }
 });
 
+// const getAuctionWinner = asyncHandler(async (req, res) => {
+//   try {
+//     const auction = await Auction.findById(req.params.id)
+//       .populate({
+//         path: "bids",
+//         populate: {
+//           path: "bidder",
+//           select: "fullName profilePicture",
+//         },
+//       })
+//       .populate({
+//         path: "winner",
+//         populate: {
+//           path: "bidder",
+//           select: "fullName profilePicture",
+//         },
+//       });
+
+//     if (!auction) {
+//       return res.status(404).json(new ApiResponse(404, "Auction not found"));
+//     }
+
+//     if (!auction.bids || auction.bids.length === 0) {
+//       return res.status(404).json(new ApiResponse(404, "No bids found"));
+//     }
+
+//     // Determine the winner if not already set
+//     if (!auction.winner) {
+//       const highestBid = auction.bids.reduce((max, bid) => 
+//         bid.bidAmount > max.bidAmount ? bid : max, auction.bids[0]);
+
+//       // Update the winner in the auction
+//       auction.winner = highestBid._id;
+//       auction.status = "over";
+//       await auction.save();
+//     }
+
+//     const winner = {
+//       winnerFullName: auction.winner?.bidder?.fullName,
+//       winnerProfilePicture: auction.winner?.bidder?.profilePicture,
+//       winnerBidAmount: auction.winner?.bidAmount,
+//       winnerBidTime: auction.winner?.bidTime,
+//     };
+
+//     return res.status(200).json(new ApiResponse(200, "Auction winner retrieved successfully", { winner }));
+//   } catch (error) {
+//     return res.status(500).json(new ApiResponse(500, error?.message || "Internal server error"));
+//   }
+// });
+
+
 
 
 // @desc Get LIVE 10 auctions 

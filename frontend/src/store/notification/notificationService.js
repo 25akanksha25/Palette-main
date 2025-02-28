@@ -47,6 +47,13 @@ export const markNotificationAsRead= async (id) => {
     return response.data;
   };
 
+  export const deleteBidAndUpdateWinner = async (deletedUserId) => {
+    const response = await axios.delete(`${API_URL}/bids/delete/${deletedUserId}`, {
+        withCredentials: true,
+    });
+    return response.data;
+};
+
 
 
 
@@ -59,6 +66,7 @@ const notificationService= {
     markNotificationAsRead,
     sendNewBidNotification,
     markAllNotificationsAsRead,
+    deleteBidAndUpdateWinner,
 }
 
 

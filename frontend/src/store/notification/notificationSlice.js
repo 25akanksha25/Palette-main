@@ -52,6 +52,29 @@ export const markAllNotificationsAsRead = createAsyncThunk("notification/markAll
     }
 })
 
+export const sendAuctionWinnerNotification = createAsyncThunk("notification/sendAuctionWinnerNotification", async (data, thunkAPI) => {
+    try {
+      return await notificationService.sendAuctionWinnerNotification(data);
+    } catch (error) {
+      const message = (error.response && error.response.data.message) || error.message;
+      return thunkAPI.rejectWithValue({ message, isError: true });
+    }
+  });
+  
+
+export const deleteBidAndUpdateWinner = createAsyncThunk(
+    "notification/deleteBidAndUpdateWinner",
+    async (deletedUserId, thunkAPI) => {
+        try {
+            return await notificationService.deleteBidAndUpdateWinner(deletedUserId);
+        } catch (error) {
+            const message = (error.response && error.response.data.message) || error.message;
+            return thunkAPI.rejectWithValue({ message, isError: true });
+        }
+    }
+);
+
+
 
 const initialState={
     notifications:[],
@@ -151,6 +174,43 @@ const notificationSlice = createSlice({
             state.isSuccess=false;
             state.message=action.payload.message;
         })
+        
+        .addCase(deleteBidAndUpdateWinner.pending, (state) => {
+            state.isLoading = true;
+            state.isError = false;
+            state.isSuccess = false;
+            state.message = "";
+        })
+        .addCase(deleteBidAndUpdateWinner.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.isError = false;
+            
+            // Remove deleted user's bid from state
+            state.notifications = state.notifications.filter(
+                (bid) => bid.user !== action.payload.deletedUserId
+            );
+        
+            // Update the new winner and current bid
+            if (action.payload.newWinner && action.payload.newHighestBid) {
+                state.winner = action.payload.newWinner;
+                state.currentBid = action.payload.newHighestBid;
+                state.message = `${action.payload.newWinner} won the bid with ${action.payload.newHighestBid}`;
+            } else {
+                state.winner = null;
+                state.currentBid = 0; // Reset bid if no valid winner
+                state.message = "";
+            }
+        })
+        
+        
+        
+        .addCase(deleteBidAndUpdateWinner.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.isSuccess = false;
+            state.message = action.payload.message;
+        });
         
         
         

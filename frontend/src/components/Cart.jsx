@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCartItems } from "../store/cart/cartSlice";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import the Toastify CSS
+import "react-toastify/dist/ReactToastify.css"; 
 
 const Cart = () => {
-  const [paidProducts, setPaidProducts] = useState({}); // Track payment status for each product
+  const [paidProducts, setPaidProducts] = useState({});
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ const Cart = () => {
     // Check if the payment success state is stored in localStorage
     const storedPaidStatus = localStorage.getItem("paidProducts");
     if (storedPaidStatus) {
-      setPaidProducts(JSON.parse(storedPaidStatus)); // Load the saved payment status from localStorage
+      setPaidProducts(JSON.parse(storedPaidStatus)); 
     }
   }, [dispatch]);
 
@@ -27,7 +27,7 @@ const Cart = () => {
     try {
       // Send a POST request to your backend to create an order
       const { data } = await axios.post(
-        "http://localhost:8000/api/v1/payments/razorpay-order",
+        "http://localhost:8010/api/v1/payments/razorpay-order",
         {
           amount: product.startingPrice, // Razorpay requires amount in paise (1 INR = 100 paise)
           productId: product._id,
@@ -39,7 +39,7 @@ const Cart = () => {
 
       // Prepare Razorpay options
       const options = {
-        key: "rzp_test_HA0dblFvRuSZ2X", // Replace with your Razorpay Key ID
+        key: "rzp_test_HA0dblFvRuSZ2X",
         amount: amount, // Amount in paise
         currency: currency,
         name: product.name,
@@ -51,12 +51,12 @@ const Cart = () => {
           
           // Update the payment status for this product
           setPaidProducts((prev) => {
-            const newPaidProducts = { ...prev, [product._id]: true }; // Mark this product as paid
-            localStorage.setItem("paidProducts", JSON.stringify(newPaidProducts)); // Store the updated payment status
+            const newPaidProducts = { ...prev, [product._id]: true }; 
+            localStorage.setItem("paidProducts", JSON.stringify(newPaidProducts)); 
             return newPaidProducts;
           });
           
-          console.log("Payment response:", response); // Handle successful payment
+          console.log("Payment response:", response); 
         },
         prefill: {
           name: "Your Name",
