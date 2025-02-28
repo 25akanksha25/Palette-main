@@ -25,16 +25,16 @@ const HeroHome = () => {
           </p>
           <div className="flex gap-4">
             <Link
-              className="hover:scale-105 flex border border-black px-5 py-3 mt-2 rounded-xl text-white cursor-pointer font-bold tracking-wide hover:bg-pink-500 transition-all duration-200 w-fit"
+              className="hover:scale-105 flex border border-black px-5 py-3 mt-2 rounded-xl text-black cursor-pointer font-bold tracking-wide hover:bg-black hover:text-white transition-all duration-200 w-fit"
               to="/about-us"
             >
-              <div className="flex items-center gap-2 text-black">
+              <div className="flex items-center gap-2">
                 <RiFindReplaceLine />
                 <span>Explore More</span>
               </div>
             </Link>
             <Link
-              className="hover:scale-105 flex bg-black px-5 py-3 mt-2 rounded-xl text-white cursor-pointer font-bold tracking-wide hover:bg-pink-500 hover:text-black transition-all duration-200 w-fit"
+              className="hover:scale-105 flex bg-black px-5 py-3 mt-2 rounded-xl text-white cursor-pointer font-bold tracking-wide hover:bg-white hover:text-black hover:border-2 hover:border-black transition-all duration-200 w-fit"
               to={logInUser ? "/user-profile/profile" : "/login"}
             >
               <div className="flex items-center gap-2">

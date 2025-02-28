@@ -106,10 +106,10 @@ const Header = () => {
           Viewing Rooms
         </Link>
         <Link
-          to="/galleries"
+          to="/events"
           className="text-black font-Roboto text-lg mx-3 hover:text-pink-500 transition-all"
         >
-          Galleries
+          Fairs & Events
         </Link>
       </div>
 
@@ -248,8 +248,8 @@ const Header = () => {
             </Link>
           </li>
           <li className="cursor-pointer capitalize text-2xl py-4">
-            <Link to="/galleries" onClick={() => setNavbarOpen(!navbarOpen)}>
-              Galleries
+            <Link to="/events" onClick={() => setNavbarOpen(!navbarOpen)}>
+              Fairs & Events
             </Link>
           </li>
         </ul>

@@ -91,6 +91,19 @@ const NavSidebar = ({closeNavbar}) => {
               Auctions
             </Link>
           </li>
+          
+          <li>
+            <Link
+              className={`flex items-center gap-2  py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-theme-color hover:bg-theme transition-all duration-500 ${
+                activeLink === "/admin/artwork" ? " text-white" : ""
+              }`}
+              to="/admin/artwork"
+              onClick={() => handleLinkClick("/admin/artwork")}
+            >
+              <FaCirclePlus size={16} className="text-theme-color" />
+              Artworks
+            </Link>
+          </li>
 
           <li>
             <Link

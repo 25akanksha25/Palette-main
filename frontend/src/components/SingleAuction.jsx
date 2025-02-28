@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import CountDownTimer from "../components/CountDownTimer";
 import { useState } from "react";
-import { BsCurrencyDollar } from "react-icons/bs";
+// import { BsCurrencyDollar } from "react-icons/bs";
 import socket from "../socket";
 // eslint-disable-next-line react/prop-types
 
@@ -90,12 +90,12 @@ const SingleAuction = ({
             }`}
             >
               {" "}
-              <BsCurrencyDollar
+              {/* <BsCurrencyDollar
                 size={18}
                 strokeWidth={0.4}
                 className="mt-[-2px]"
-              />
-              <span>Place Bid</span>
+              /> */}
+              <span> ₹ Place Bid</span>
             </Link>
           </div>
         )}
