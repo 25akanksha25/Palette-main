@@ -72,12 +72,6 @@ const UploadItem = () => {
   const handleProductUpload = async (e) => {
     e.preventDefault();
     //image data so use new formdata
-
-    const nameRegex = /^[A-Za-z\s]+$/;
-    if (!nameRegex.test(formData.name)) {
-      toast.error("Invalid name! Only alphabets and spaces are allowed.");
-      return;
-    }
     const data = new FormData();
     ////console.log(formData);
     data.append("name", formData.name);

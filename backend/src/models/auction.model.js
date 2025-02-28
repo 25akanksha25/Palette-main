@@ -16,7 +16,7 @@ const auctionSchema = new mongoose.Schema({
   location: {type:mongoose.Schema.Types.ObjectId, ref:"City" },
   image:{type:String,required:true},
   startingPrice: { type: Number, required: true },
-  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],// commnet this line
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
   paid:{
     type:Boolean,
     default:false

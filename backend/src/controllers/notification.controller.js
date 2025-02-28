@@ -93,11 +93,7 @@ const sendNotification = asyncHandler(async (req, res) => {
   if (type === "BID_PLACED") {
     var notification = {
       user: null,
-<<<<<<< HEAD
       message: `${req?.user?.fullName} has placed a ${newBidAmount} bid on ${auction?.name}`,
-=======
-      message: `${req?.user?.fullName} has placed a ${newBidAmount}₹ bid on ${auction?.name}`,
->>>>>>> fa7afd1ece47dda72de1848f6b84f48475595cf5
       type: "BID_PLACED",
       auction: auctionId,
       link: `/single-auction-detail/${auctionId}`,
@@ -152,11 +148,7 @@ const sendNotification = asyncHandler(async (req, res) => {
     userIds.forEach(async (id) => {
       notification.message = `${
         id === req?.user?._id.toString() ? "you" : req?.user?.fullName
-<<<<<<< HEAD
       } placed a ${newBidAmount} bid on  ${auction?.name}`;
-=======
-      } placed a ${newBidAmount}₹ bid on  ${auction?.name}`;
->>>>>>> fa7afd1ece47dda72de1848f6b84f48475595cf5
 
       await new Notification({ ...notification, user: id }).save();
     });
