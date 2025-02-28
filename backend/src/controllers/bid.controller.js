@@ -159,82 +159,7 @@ const getAllBidsByAuctionId = asyncHandler(async (req, res) => {
   
 });
 
-// const deleteBid = asyncHandler(async (req, res) => {
-//   const { deletedUserId, auctionId } = req.params;
-
-//   // Delete the bid
-//   await Bid.deleteOne({ bidder: deletedUserId, auction: auctionId });
-
-//   // Find the second-highest bidder
-//   const secondHighestBid = await Bid.findOne({ auction: auctionId })
-//       .sort({ bidAmount: -1 }) // Ensure sorting is based on bidAmount
-//       .populate("bidder", "fullName");
-
-//   let updatedWinner = null;
-//   let updatedBidAmount = 0; // Initialize with zero
-
-//   if (secondHighestBid) {
-//       updatedWinner = secondHighestBid.bidder._id;
-//       updatedBidAmount = secondHighestBid.bidAmount; // Get the correct bid amount
-//       await Auction.findByIdAndUpdate(auctionId, { winner: updatedWinner });
-//   }
-
-//   // Send notification with the correct bid amount
-//   if (updatedWinner) {
-//       await notificationService.sendNewBidNotification({
-//           userId: updatedWinner,
-//           message: `You are now the highest bidder with a bid of ${updatedBidAmount}`,
-//       });
-//   }
-
-//   res.status(200).json({
-//       message: "Bid deleted, winner updated",
-//       deletedUserId,
-//       newWinner: updatedWinner,
-//       newBidAmount: updatedBidAmount, // Send the correct bid amount in the response
-//   });
-// });
-
-// const deleteBid = asyncHandler(async (req, res) => {
-//   const { deletedUserId, auctionId } = req.params;
-
-//   // Delete the bid
-//   await Bid.deleteOne({ bidder: deletedUserId, auction: auctionId });
-
-//   // Find the second-highest bidder
-//   const secondHighestBid = await Bid.findOne({ auction: auctionId })
-//       .sort({ bidAmount: -1 }) // Ensure sorting is based on bidAmount
-//       .populate("bidder", "fullName");
-
-//   let updatedWinner = null;
-//   let updatedBidAmount = 0; // Default to zero
-
-//   if (secondHighestBid) {
-//       updatedWinner = secondHighestBid.bidder._id;
-//       updatedBidAmount = secondHighestBid.bidAmount;
-//   }
-
-//   // Update the auction winner or set to null if no bids left
-//   await Auction.findByIdAndUpdate(auctionId, { 
-//       winner: updatedWinner || null
-//   });
-
-//   // Send notification only if there's a new winner
-//   if (updatedWinner) {
-//       await notificationService.sendNewBidNotification({
-//           userId: updatedWinner,
-//           message: `You are now the highest bidder with a bid of ${updatedBidAmount}`,
-//       });
-//   }
-
-//   res.status(200).json({
-//       message: "Bid deleted, winner updated",
-//       deletedUserId,
-//       newWinner: updatedWinner,
-//       newBidAmount: updatedBidAmount,
-//   });
-// });
-
+//good code 
 // const deleteBid = asyncHandler(async (req, res) => {
 //   const { deletedUserId, auctionId } = req.params;
 
@@ -246,93 +171,72 @@ const getAllBidsByAuctionId = asyncHandler(async (req, res) => {
 //       .sort({ bidAmount: -1 })  // Sort in descending order
 //       .populate("bidder", "fullName");
 
-//   // Update the auction winner
+//   let updatedWinner = null;
+//   let updatedBidAmount = 0;
+
 //   if (secondHighestBid) {
-//       await Auction.findByIdAndUpdate(auctionId, { winner: secondHighestBid.bidder._id });
+//       updatedWinner = secondHighestBid.bidder;
+//       updatedBidAmount = secondHighestBid.bidAmount;
+//       await Auction.findByIdAndUpdate(auctionId, { winner: updatedWinner._id });
 //   } else {
-//       // If no other bids exist, remove the winner field
+//       // If no other bids exist, unset the winner field
 //       await Auction.findByIdAndUpdate(auctionId, { $unset: { winner: "" } });
+//   }
+
+//   // Check if there's a valid updated winner and send notification
+//   if (updatedWinner && updatedWinner._id) {
+//       await notificationService.sendNewBidNotification({
+//           userId: updatedWinner._id,
+//           message: `${updatedWinner.fullName} won the bid with ₹${updatedBidAmount}`,
+//       });
 //   }
 
 //   res.status(200).json(new ApiResponse(200, "Bid deleted, winner updated", {
 //       deletedUserId,
-//       newWinner: secondHighestBid ? secondHighestBid.bidder : null,
+//       newWinner: updatedWinner,
 //   }));
 // });
-
-// const deleteBid = asyncHandler(async (req, res) => {
-//   const { deletedUserId, auctionId } = req.params;
-
-//   try {
-//     // Delete the bid
-//     await Bid.deleteOne({ bidder: deletedUserId, auction: auctionId });
-
-//     // Fetch updated bid list after deletion
-//     const remainingBids = await Bid.find({ auction: auctionId })
-//       .sort({ bidAmount: -1 }) // Sort by highest bid
-//       .populate("bidder", "fullName");
-
-//     let updatedWinner = null;
-//     let updatedBidAmount = 0;
-
-//     if (remainingBids.length > 0) {
-//       updatedWinner = remainingBids[0].bidder; // New highest bidder
-//       updatedBidAmount = remainingBids[0].bidAmount; // New highest bid amount
-
-//       // Update the auction with the new winner
-//       await Auction.findByIdAndUpdate(auctionId, { winner: updatedWinner._id });
-//     } else {
-//       // If no bids remain, remove the winner field
-//       await Auction.findByIdAndUpdate(auctionId, { $unset: { winner: "" } });
-//     }
-
-//     res.status(200).json(new ApiResponse(200, "Bid deleted, winner updated", {
-//       deletedUserId,
-//       newWinner: updatedWinner,
-//       newHighestBid: updatedBidAmount,
-//       message: updatedWinner ? `${updatedWinner.fullName} won the bid with ${updatedBidAmount}` : "No winner remaining",
-//     }));
-
-//   } catch (error) {
-//     return res.status(500).json(new ApiResponse(500, error?.message || "Internal server error"));
-//   }
-// });
-
 
 const deleteBid = asyncHandler(async (req, res) => {
   const { deletedUserId, auctionId } = req.params;
 
-  // Delete the bid
   await Bid.deleteOne({ bidder: deletedUserId, auction: auctionId });
 
-  // Find the second-highest bidder
-  const secondHighestBid = await Bid.findOne({ auction: auctionId })
-      .sort({ bidAmount: -1 })  // Sort in descending order
-      .populate("bidder", "fullName");
+  // Find the updated bid list after deletion
+  const remainingBids = await Bid.find({ auction: auctionId })
+    .sort({ bidAmount: -1 }) 
+    .populate("bidder", "fullName");
 
   let updatedWinner = null;
   let updatedBidAmount = 0;
 
-  if (secondHighestBid) {
-      updatedWinner = secondHighestBid.bidder;
-      updatedBidAmount = secondHighestBid.bidAmount;
-      await Auction.findByIdAndUpdate(auctionId, { winner: updatedWinner._id });
+  if (remainingBids.length > 0) {
+    updatedWinner = remainingBids[0].bidder;
+    updatedBidAmount = remainingBids[0].bidAmount; 
+
+    // Update the auction with new highest bid
+    await Auction.findByIdAndUpdate(auctionId, { 
+      winner: updatedWinner._id, 
+      startingPrice: updatedBidAmount 
+    });
   } else {
-      // If no other bids exist, unset the winner field
-      await Auction.findByIdAndUpdate(auctionId, { $unset: { winner: "" } });
+    await Auction.findByIdAndUpdate(auctionId, { 
+      $unset: { winner: "" }, 
+      startingPrice: 0 
+    });
   }
 
-  // Check if there's a valid updated winner and send notification
   if (updatedWinner && updatedWinner._id) {
-      await notificationService.sendNewBidNotification({
-          userId: updatedWinner._id,
-          message: `${updatedWinner.fullName} won the bid with ₹${updatedBidAmount}`,
-      });
+    await notificationService.sendNewBidNotification({
+      userId: updatedWinner._id,
+      message: `${updatedWinner.fullName} is now the highest bidder with ₹${updatedBidAmount}`,
+    });
   }
 
   res.status(200).json(new ApiResponse(200, "Bid deleted, winner updated", {
-      deletedUserId,
-      newWinner: updatedWinner,
+    deletedUserId,
+    newWinner: updatedWinner,
+    newHighestBid: updatedBidAmount
   }));
 });
 

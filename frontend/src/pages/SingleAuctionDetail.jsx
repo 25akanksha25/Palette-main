@@ -167,8 +167,6 @@ const SingleAuctionDetail = ({ noPadding }) => {
     return <Loading />;
   }
 
-  // Rest of your code
-
   return (
     <>
       <div
@@ -280,7 +278,7 @@ const SingleAuctionDetail = ({ noPadding }) => {
 
           <div className="flex flex-col gap-4 pt-4 border-t border-border-info-color">
             <div className="flex justify-between items-center">
-              <div className="flex flex-col gap-2">
+              {/* <div className="flex flex-col gap-2">
                 <h3 className="text-black font-medium">
                   {" "}
                   {singleAuction?.bids?.length > 0
@@ -290,7 +288,19 @@ const SingleAuctionDetail = ({ noPadding }) => {
                 <p className="text-gray-700">
                   ₹{singleAuctionData?.startingPrice}
                 </p>
+              </div> */}
+              <div className="flex flex-col gap-2">
+                <h3 className="text-black font-medium">
+                  {singleAuction?.bids?.length > 0 ? "Current Bid" : "Starting Price"}
+                </h3>
+                <p className="text-gray-700">
+                  ₹{singleAuction?.bids?.length > 0 
+                    ? singleAuction?.bids?.[0]?.bidAmount 
+                    : singleAuctionData?.startingPrice}
+                </p>
               </div>
+
+
               <div className="flex flex-col gap-2">
                 <h3 className="text-black font-medium">Time </h3>
                 <p className="text-gray-700">
