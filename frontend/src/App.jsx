@@ -5,7 +5,7 @@ import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import Home from "./pages/Home";
 import ArtWorks from "./pages/ArtWorks";
-// import ArtworkDetails from "./pages/ArtWorkDetails";
+import ArtworkDetails from "./pages/ArtWorkDetails";
 import ViewRoom from "./pages/ViewRoom";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
@@ -23,14 +23,6 @@ import { useSelector } from "react-redux";
 import AdminFooter from "./admin/components/Footer"
 import AdminHeader from "./admin/components/Header"
 import AdminDashboard from "./admin/Admin"
-// <<<<<<< HEAD
-// import PurchaseArtWork from "./pages/PurchaseArtWork";
-import EventPage from "./pages/EventPage";
-
-// =======
-import UploadArtwork from "./pages/UploadArtwork";
-import SingleArtworkDetail from "./pages/SingleArtworkDetail";
-// >>>>>>> e5c1fae06ddfdb4ae86461825f1f301e7c75dec9
 
 
 const App = () => {
@@ -48,19 +40,13 @@ console.log(user,"...")
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/ArtWork" element={<ArtWorks />} />
+          <Route path="/artwork/:artworkId" element={<ArtworkDetails />} />
           <Route path="/viewroom" element={<ViewRoom/>} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/events" element={<EventPage/>} />
-
           <Route
             path="/single-auction-detail/:id"
             element={<SingleAuctionDetail />}
           />
-          <Route 
-            path="/single-artwork-detail/:id" 
-            element={<SingleArtworkDetail />} 
-          />
-
 
           <Route path="*" element={<ErrorPage />} />
 
@@ -79,7 +65,6 @@ console.log(user,"...")
             <Route path="/edit-auction/:id" element={<EditAuction />} />
             <Route element={<SellerRoutes />}>
               <Route path="/create-auction" element={<UploadItem />} />
-              <Route path="/create-artwork" element={<UploadArtwork/>} />
             </Route>
            
           </Route>

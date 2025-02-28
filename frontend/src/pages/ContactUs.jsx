@@ -38,22 +38,21 @@ const ContactUs = () => {
 
   return (
     <>
-      <div className="relative">
+      {/* <div className="relative">
         <img
           src={contacthead} 
           alt="Contactus Banner"
           className="w-full h-[350px] object-cover"
         />
-      </div>
+      </div> */}
       <div className="w-full h-full"
-        // style={{
-        //       backgroundImage: `url(${background})`,
-        //       backgroundSize: "cover",
-        //       backgroundPosition: "center",
-        //       backgroundRepeat: "no-repeat",
-        //       backgroundAttachment: "fixed",
-        // }}
-        >
+        style={{
+              backgroundImage: `url(${background})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              backgroundAttachment: "fixed",
+        }}>
         <div className="max-w-[1000px] m-auto px-5 py-20 flex flex-col gap-20">
           <div className="grid grid-cols-1 m-auto gap-5 w-full max-w-[1000px] md:grid-cols-3">
             <div className="text-xl flex flex-col gap-4 items-center justify-start p-8 rounded-2xl bg-gray-500 text-white w-full">
