@@ -64,7 +64,7 @@ const ArtWorks = () => {
                 <h3 className="text-lg font-semibold text-black">
                   {artwork.seller?.fullName || "Unknown Seller"}
                 </h3>
-                <p className="text-sm text-gray-600">{artwork.description}</p>
+                {/* <p className="text-sm text-gray-600">{artwork.description}</p> */}
                 <div className="flex gap-2 mt-2">
                   <span className="bg-gray-200 text-gray-700 px-2 py-1 text-sm rounded-full">
                     {artwork.category?.name}
@@ -75,15 +75,17 @@ const ArtWorks = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-2 mt-2">
                   <p className="text-lg text-black mt-4 font-bold">
-                    Rs{artwork.price}
+                    Rs {artwork.price}
                   </p>
+                </div>
+              </div>
+              <div className="w-full">
                   <Link key={artwork._id} to={`/single-artwork-detail/${artwork._id}`}>
-                    <button className="border-2 border-black rounded p-2 text-black hover:bg-black hover:text-white">
+                    <button className="w-full text-white bg-black hover:border-2 hover:border-black rounded p-2 hover:bg-white hover:text-black">
                       Purchase
                     </button>
                   </Link>
                 </div>
-              </div>
             </div>
           ))
         ) : (

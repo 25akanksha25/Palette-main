@@ -12,6 +12,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { BsCart3 } from "react-icons/bs";
 import logoimg from "../assets/logo.png";
 
+
 const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -56,7 +57,7 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center px-2  sm:px-14 bg-white py-4 border-b border-border-info-color">
       {/* Logo */}
-      <div className="flex items-center px-1 z-[1]">
+      <div className="flex items-center">
         <Link to="/" className="no-underline">
           <img
             src={logoimg}
@@ -67,14 +68,13 @@ const Header = () => {
       </div>
 
       {/* Desktop Links */}
-      <div className="hidden sm:block">
+      <div className="hidden sm:flex space-x-6">
         <Link
           to="/"
           className="text-black font-Roboto text-lg mx-3 hover:text-pink-500 transition-all"
         >
           Home
         </Link>
-
         <Link
           to="/contact-us"
           className="text-black font-Roboto text-lg mx-3 hover:text-pink-500 transition-all"
@@ -113,7 +113,7 @@ const Header = () => {
         </Link>
       </div>
 
-      <div className="flex items-center cursor-pointer z-[1]">
+      <div className="flex items-center cursor-pointer">
         {user ? (
           <div className="flex justify-center items-center">
             <Link
@@ -143,10 +143,10 @@ const Header = () => {
             </Link>
             <Link
               onClick={() => setNavbarOpen(!navbarOpen)}
-              className="text-white font-Roboto sm:hidden text-lg mx-3 order-3"
+              className="text-black font-Roboto sm:hidden text-lg mx-3 order-3 z-50"
             >
-              {navbarOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-            </Link>
+              {navbarOpen ? <FaTimes size={25} color="black"/> : <FaBars size={25} color="black"/>}
+              </Link>
           </div>
         ) : (
           <>
@@ -214,9 +214,10 @@ const Header = () => {
       ) : null}
 
 
+
       {/* Mobile Navbar */}
       {navbarOpen && (
-        <ul className="flex sm:hidden flex-col justify-center items-center absolute top-16 left-0 w-full h-screen bg-gradient-to-b from-gray-200 to-gray-100 text-gray-800 z-10">
+        <ul className="flex z-20 sm:hidden flex-col justify-center items-center absolute top-16 left-0 w-full h-screen bg-gradient-to-b from-gray-200 to-gray-100 text-gray-800">
           <li className="cursor-pointer capitalize text-2xl py-4">
             <Link to="/" onClick={() => setNavbarOpen(!navbarOpen)}>
               Home
@@ -238,12 +239,12 @@ const Header = () => {
             </Link>
           </li>
           <li className="cursor-pointer capitalize text-2xl py-4">
-            <Link to="/auction" onClick={() => setNavbarOpen(!navbarOpen)}>
+            <Link to="/dashboard" onClick={() => setNavbarOpen(!navbarOpen)}>
               Auctions
             </Link>
           </li>
           <li className="cursor-pointer capitalize text-2xl py-4">
-            <Link to="/rooms" onClick={() => setNavbarOpen(!navbarOpen)}>
+            <Link to="/viewroom" onClick={() => setNavbarOpen(!navbarOpen)}>
               Viewing Rooms
             </Link>
           </li>

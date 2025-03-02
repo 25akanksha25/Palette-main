@@ -13,6 +13,9 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { IoLogOutSharp, IoWalletOutline } from "react-icons/io5";
 import { BiSolidCategory } from "react-icons/bi";
 import { RiAuctionFill } from "react-icons/ri";
+import { FaPaintBrush } from "react-icons/fa";
+
+
 const Sidebar = ({ closeNavbar }) => {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
@@ -107,7 +110,7 @@ const Sidebar = ({ closeNavbar }) => {
               to="/admin/artworks"
               onClick={() => handleLinkClick("/admin/artworks")}
             >
-              <RiAuctionFill
+              <FaPaintBrush
                 size={16}
                 className={`text-black transition-all duration-500 ${
                   activeLink === "/admin/artworks" ? " text-black" : ""

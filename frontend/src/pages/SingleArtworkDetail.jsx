@@ -7,6 +7,7 @@ import { toast } from "react-toastify"; // For error handling
 const SingleArtworkDetail = () => {
   const { id } = useParams(); // Get artwork ID from URL
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
   const logInUser = JSON.parse(localStorage.getItem("user"));
   const {
     singleartwork: artwork,
@@ -74,6 +75,11 @@ const SingleArtworkDetail = () => {
 
   return (
     <div className="p-6 bg-white">
+      {user?.userType === "seller" && (
+        <Link to='/artwork'>
+          <button className="p-2 text-xl rounded-full border-2 border-black hover:text-white hover:bg-black">Back to artwork</button>
+        </Link>
+      )}
       <h1 className="text-5xl text-black mb-4 mt-10 font-extrabold">Artwork Details</h1>
 
       <div className="flex flex-col sm:flex-row items-center bg-gray-100 p-8 rounded-lg shadow-lg">
@@ -84,7 +90,7 @@ const SingleArtworkDetail = () => {
               src={artwork.image[0]} // Show the first image
               alt={`Artwork by ${artwork.seller?.fullName || "Unknown"}`}
               className="w-full object-cover rounded-lg shadow-lg"
-              style={{ maxWidth: "900px", height: "800px" }}
+              style={{ maxWidth: "auto", height: "550px" }}
             />
           ) : (
             <p>No Image Available</p>
@@ -93,17 +99,17 @@ const SingleArtworkDetail = () => {
 
         {/* Artwork Details */}
         <div className="w-full sm:w-1/2">
-          <div className="mb-6">
+          <div className="mb-6 ">
             <h2 className="text-5xl font-extrabold text-black">{artwork.name}</h2>
-            <h3 className="text-3xl font-semibold text-black mt-2">
+            <h3 className="text-3xl font-semibold text-gray-900 mt-2">
               {artwork.seller?.fullName || "Unknown Seller"}
             </h3>
           </div>
 
-          <p className="text-xl text-gray-600 mt-2">{artwork.description}</p>
+          <p className="text-xl text-gray-600 p-2 mt-2">{artwork.description}</p>
 
           <div className="mt-6">
-            <p className="text-xl text-black">
+            <p className="text-xl text-black mb-2">
               <strong>Dimensions:</strong>
               <p>Width: {artwork.width} cm</p>
               <p>Height: {artwork.height} cm</p>
@@ -111,13 +117,13 @@ const SingleArtworkDetail = () => {
             </p>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 flex">
             <p className="text-xl font-semibold text-black">Tags:</p>
-            <div className="flex gap-2 mt-2">
-              <span className="bg-gray-200 text-gray-700 px-2 py-1 text-sm rounded-full">
+            <div className="flex gap-2 ml-2">
+              <span className="bg-gray-200 text-gray-700 px-3 py-2 text-md rounded-full">
                 {artwork.category?.name || "No Category"}
               </span>
-              <span className="bg-gray-200 text-gray-700 px-2 py-1 text-sm rounded-full">
+              <span className="bg-gray-200 text-gray-700 px-3 py-2 text-md rounded-full">
                 {artwork.location?.name || "No Location"}
               </span>
             </div>
