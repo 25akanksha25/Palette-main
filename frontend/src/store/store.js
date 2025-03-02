@@ -9,11 +9,13 @@ import notificationReducer from './notification/notificationSlice';
 import cartReducer from "./cart/cartSlice";
 import userReducer from "./user/userSlice";
 import artworkReducer from "./artwork/artworkSlice";
+import eventReducer from "./event/eventSlice";
 
 export const store= configureStore({
     reducer: {
         //reducers
         auth: authReducer,
+        event: eventReducer,
         artwork: artworkReducer,
         auction: auctionReducer,
         category: categoryReducer,

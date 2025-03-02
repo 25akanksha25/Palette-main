@@ -26,6 +26,8 @@ import notificationRouter from "./routes/notification.routes.js";
 import paymentRouter from "./routes/payment.routes.js";
 import cartRouter from "./routes/cart.routes.js";
 import artwork from "./routes/artwork.routes.js";
+import event from "./routes/event.routes.js";
+
 
 
 
@@ -40,7 +42,7 @@ app.use("/api/v1/notifications",notificationRouter);
 app.use("/api/v1/payments",paymentRouter);
 app.use("/api/v1/cart", cartRouter);
 app.use("/api/v1/artwork",artwork);
-
+app.use("/api/v1/event",event);
 
 
 export {app}
