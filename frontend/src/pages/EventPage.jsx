@@ -1,3 +1,146 @@
+// import React, { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getAllEvents } from "../store/event/eventSlice";
+// import backgroundImg from "../assets/eventHeader3.gif";
+// import { toast } from "react-toastify";
+
+// const EventPage = () => {
+//   const dispatch = useDispatch();
+//   const { user } = useSelector((state) => state.auth);
+//   const { events, isLoading, isError, message } = useSelector((state) => state.event);
+
+//   const [eventData, setEventData] = useState([]);
+
+//   useEffect(() => {
+//     dispatch(getAllEvents());
+//   }, [dispatch]);
+
+//   useEffect(() => {
+//     if (Array.isArray(events)) {
+//       setEventData(events);
+//     } else if (isError) {
+//       toast.error(message);
+//     }
+//   }, [events, isError, message]);
+
+//   const now = new Date();
+//   const currentEvents = eventData.filter(
+//     (event) => new Date(event.startDate) <= now && new Date(event.endDate) >= now
+//   );  
+//   const pastEvents = eventData.filter((event) => new Date(event.endDate) < now);
+//   const upcomingEvents = eventData.filter((event) => new Date(event.startDate) > now);
+
+//   return (
+//     <div>
+//       <div className="flex flex-col items-center justify-center">
+//         <div className="relative w-full h-[600px]">
+//           <img src={backgroundImg} alt="Event Background" className="object-cover w-full h-full" />
+//         </div>
+//       </div>
+
+//       <div className="flex justify-between items-center px-10 py-10">
+//         <div className="max-w-2xl">
+//           <h2 className="text-5xl font-extrabold text-gray-900 mb-4 italic leading-tight">
+//             "Experience, Explore, Engage!"
+//           </h2>
+//           <div className="w-24 h-1 bg-black mb-4"></div>
+//           <p className="text-lg text-gray-700">
+//             Discover the most exciting fairs, exhibitions, and events happening around you.
+//             Whether you're an art lover, a creator, or just looking for something new, there's an event waiting for you!
+//           </p>
+//         </div>
+
+//         {user?.userType === "seller" && (
+//           <Link to="/create-event">
+//             <button className="border-2 border-black px-6 py-3 rounded-xl text-lg font-semibold text-black hover:text-white hover:bg-black transition duration-300 shadow-md">
+//               + Register Your Event Here
+//             </button>
+//           </Link>
+//         )}
+//       </div>
+
+//       <h3 className="text-5xl font-bold italic px-10 mb-6">Current Events</h3>
+//       <div className="grid grid-cols-2 gap-6 px-10">
+//         {currentEvents.length > 0 ? (
+//           currentEvents.map((event) => (
+//             <div
+//               key={event._id}
+//               className="cursor-pointer relative group"
+//               onClick={() => (window.location.href = `/single-event-detail/${event._id}`)}
+//             >
+//               <div className="relative">
+//                 <img src={event.eventImage} alt={event.title} className="w-full h-60 object-cover rounded-md" />
+//                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all"></div>
+//                 <div className="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white text-lg px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+//                   Explore Event
+//                 </div>
+//               </div>
+//               <h4 className="text-xl font-bold mt-2">{event.title}</h4>
+//               <p className="text-gray-600 mb-6">
+//                 📅 {new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}
+//               </p>
+//             </div>
+//           ))
+//         ) : (
+//           <p className="text-gray-500 text-center col-span-2">No current events available.</p>
+//         )}
+//       </div>
+
+//       <div className="flex justify-between px-10 mt-10">
+//         {/* Past Events */}
+//         <div className="w-1/2">
+//           <h3 className="text-3xl font-bold mb-6">Past Events</h3>
+//           {pastEvents.length > 0 ? (
+//             pastEvents.map((event) => (
+//               <div
+//                 key={event._id}
+//                 className="flex items-center space-x-4 p-4 border-b cursor-pointer hover:bg-gray-100"
+//                 onClick={() => (window.location.href = `/single-event-detail/${event._id}`)}
+//               >
+//                 <div className="w-12 h-12 bg-gray-300 rounded-full"></div>
+//                 <div>
+//                   <h4 className="text-xl font-semibold">{event.title}</h4>
+//                   <p className="text-gray-600">
+//                     📅 {new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}
+//                   </p>
+//                 </div>
+//               </div>
+//             ))
+//           ) : (
+//             <p className="text-gray-500">No past events available.</p>
+//           )}
+//         </div>
+
+//         {/* Upcoming Events */}
+//         <div className="w-1/2">
+//           <h3 className="text-3xl font-bold mb-6">Upcoming Events</h3>
+//           {upcomingEvents.length > 0 ? (
+//             upcomingEvents.map((event) => (
+//               <div
+//                 key={event._id}
+//                 className="flex items-center space-x-4 p-4 border-b cursor-pointer hover:bg-gray-100"
+//                 onClick={() => (window.location.href = `/single-event-detail/${event._id}`)}
+//               >
+//                 <div className="w-12 h-12 bg-gray-300 rounded-full"></div>
+//                 <div>
+//                   <h4 className="text-xl font-semibold">{event.title}</h4>
+//                   <p className="text-gray-600">📅 {new Date(event.startDate).toLocaleDateString()}</p>
+//                 </div>
+//               </div>
+//             ))
+//           ) : (
+//             <p className="text-gray-500">No upcoming events available.</p>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default EventPage;
+
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,18 +151,14 @@ import { toast } from "react-toastify";
 const EventPage = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { events, isLoading, isError, message } = useSelector(
-    (state) => state.event
-  );
+  const { events, isLoading, isError, message } = useSelector((state) => state.event);
 
   const [eventData, setEventData] = useState([]);
 
-  // Fetch all events when component loads
   useEffect(() => {
     dispatch(getAllEvents());
   }, [dispatch]);
 
-  // Store events in local state when fetched
   useEffect(() => {
     if (Array.isArray(events)) {
       setEventData(events);
@@ -28,90 +167,124 @@ const EventPage = () => {
     }
   }, [events, isError, message]);
 
-  // Ensure only active events are shown
-  const availableEvents = Array.isArray(eventData)
-    ? eventData.filter((event) => new Date(event.endDate) >= new Date()) // Only show upcoming events
-    : [];
+  const now = new Date();
+  const currentEvents = eventData.filter(
+    (event) => new Date(event.startDate) <= now && new Date(event.endDate) >= now
+  );  
+  const pastEvents = eventData.filter((event) => new Date(event.endDate) < now);
+  const upcomingEvents = eventData.filter((event) => new Date(event.startDate) > now);
 
   return (
     <div>
       <div className="flex flex-col items-center justify-center">
         <div className="relative w-full h-[600px]">
-          <img
-            src={backgroundImg}
-            alt="Event Background"
-            className="object-cover w-full h-full"
-          />
+          <img src={backgroundImg} alt="Event Background" className="object-cover w-full h-full" />
         </div>
       </div>
 
-      <div className="flex justify-between items-center px-10 py-6">
-        <div className="w-2/3">
-          <h2 className="text-3xl font-bold mb-4">Fairs & Events</h2>
+      <div className="flex justify-between items-center px-10 py-10">
+        <div className="max-w-2xl">
+          <h2 className="text-5xl font-extrabold text-gray-900 mb-4 italic leading-tight">
+            "Experience, Explore, Engage!"
+          </h2>
+          <div className="w-24 h-1 bg-black mb-4"></div>
           <p className="text-lg text-gray-700">
-            Welcome to our events page! Here, you can explore upcoming fairs,
-            exhibitions, and special gatherings. Stay updated with the latest
-            happenings, and be a part of the most exciting events around you.
+            Discover the most exciting fairs, exhibitions, and events happening around you.
+            Whether you're an art lover, a creator, or just looking for something new, there's an event waiting for you!
           </p>
         </div>
 
-        <div>
         {user?.userType === "seller" && (
           <Link to="/create-event">
-            <button className="border-2 border-black p-3 rounded-xl text-lg text-black hover:text-white hover:bg-black">
-              Add Event
+            <button className="border-2 border-black px-6 py-3 rounded-xl text-lg font-semibold text-black hover:text-white hover:bg-black transition duration-300 shadow-md">
+              + Register Your Event Here
             </button>
           </Link>
         )}
-        </div>
       </div>
 
-      {/* Event Grid */}
-      <div className="grid grid-cols-3 gap-6 px-10">
-        {availableEvents.length > 0 ? (
-          availableEvents.map((event) => (
+      <h3 className="text-5xl font-bold italic px-10 mb-6">Current Events</h3>
+      <div className="grid grid-cols-2 gap-6 px-10">
+        {currentEvents.length > 0 ? (
+          currentEvents.map((event) => (
             <div
               key={event._id}
-              className="bg-white p-4 rounded-lg shadow-lg border border-gray-200"
+              className="cursor-pointer relative group"
+              onClick={() => (window.location.href = `/single-event-detail/${event._id}`)}
             >
-              <img
-                src={event.eventImage}
-                alt={event.title}
-                className="w-full h-60 object-cover rounded-md"
-              />
-              <div className="mt-4">
-                <h3 className="text-2xl font-bold text-black">{event.title}</h3>
-                <p className="text-lg text-gray-700">{event.description}</p>
-                <p className="text-sm text-gray-600 mt-1">
-                  📍 {event.location?.name || "Location not specified"}
-                </p>
-                <p className="text-sm text-gray-600">
-                  📅 {new Date(event.startDate).toLocaleDateString()} -{" "}
-                  {new Date(event.endDate).toLocaleDateString()}
-                </p>
-                <p className="text-sm text-gray-600">💰 Rs {event.pricing}</p>
-
-                <div className="mt-4">
-                  <Link to={`/event-detail/${event._id}`}>
-                    <button className="border-2 border-black rounded p-2 text-black hover:bg-black hover:text-white w-full">
-                      View Details
-                    </button>
-                  </Link>
+              <div className="relative">
+                <img src={event.eventImage} alt={event.title} className="w-full h-60 object-cover rounded-md" />
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all"></div>
+                <div className="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white text-lg px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+                  Explore Event
                 </div>
               </div>
+              <h4 className="text-xl font-bold mt-2">{event.title}</h4>
+              <p className="text-gray-600 mb-6">
+                📅 {new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}
+              </p>
             </div>
           ))
         ) : (
-          <p className="text-gray-500 text-center col-span-3">
-            No upcoming events available.
-          </p>
+          <p className="text-gray-500 text-center col-span-2">No current events available.</p>
         )}
+      </div>
+
+      <div className="flex justify-between px-10 mt-10">
+        {/* Past Events */}
+        <div className="w-1/2">
+          <h3 className="text-3xl font-bold mb-6">Past Events</h3>
+          {pastEvents.length > 0 ? (
+            pastEvents.map((event) => (
+              <div
+                key={event._id}
+                className="flex items-center justify-between space-x-4 p-4 border-b cursor-pointer hover:bg-gray-100"
+                onClick={() => (window.location.href = `/single-event-detail/${event._id}`)}
+              >
+                <div className="w-16 h-16">
+                  <img src={event.eventImage} alt={event.title} className="w-full h-full object-cover rounded-md" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-xl font-semibold">{event.title}</h4>
+                  <p className="text-gray-600">
+                    📅 {new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}
+                  </p>
+                </div>
+                <span className="text-2xl text-gray-600">➔</span>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500">No past events available.</p>
+          )}
+        </div>
+
+        {/* Upcoming Events */}
+        <div className="w-1/2">
+          <h3 className="text-3xl font-bold mb-6">Upcoming Events</h3>
+          {upcomingEvents.length > 0 ? (
+            upcomingEvents.map((event) => (
+              <div
+                key={event._id}
+                className="flex items-center justify-between space-x-4 p-4 border-b cursor-pointer hover:bg-gray-100"
+                onClick={() => (window.location.href = `/single-event-detail/${event._id}`)}
+              >
+                <div className="w-16 h-16">
+                  <img src={event.eventImage} alt={event.title} className="w-full h-full object-cover rounded-md" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-xl font-semibold">{event.title}</h4>
+                  <p className="text-gray-600">📅 {new Date(event.startDate).toLocaleDateString()}</p>
+                </div>
+                <span className="text-2xl text-gray-600">➔</span>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500">No upcoming events available.</p>
+          )}
+        </div>
       </div>
     </div>
   );
-
 };
 
 export default EventPage;
-
-

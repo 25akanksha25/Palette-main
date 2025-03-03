@@ -25,7 +25,7 @@ const Footer = () => {
             <li>
               <Link
                 to="/about-us"
-                className=" me-4 md:me-6 text-black no-underline hover:text-theme-color"
+                className=" me-4 md:me-6 text-black no-underline hover:text-[#c97064]"
               >
                 About Us
               </Link>
@@ -33,7 +33,7 @@ const Footer = () => {
             <li>
               <Link
                 to="/privacy-policy"
-                className=" me-4 md:me-6 text-black no-underline hover:text-theme-color"
+                className=" me-4 md:me-6 text-black no-underline hover:text-[#c97064]"
               >
                 Privacy Policy
               </Link>
@@ -41,7 +41,7 @@ const Footer = () => {
             <li>
               <Link
                 to="/contact-us"
-                className=" text-black no-underline hover:text-theme-color"
+                className=" text-black no-underline hover:text-[#c97064]"
               >
                 Contact Us
               </Link>

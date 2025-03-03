@@ -71,43 +71,43 @@ const Header = () => {
       <div className="hidden sm:flex space-x-6">
         <Link
           to="/"
-          className="text-black font-Roboto text-lg mx-3 hover:text-pink-500 transition-all"
+          className="text-black font-Roboto text-lg mx-3 hover:text-[#c97064] transition-all"
         >
           Home
         </Link>
         <Link
           to="/contact-us"
-          className="text-black font-Roboto text-lg mx-3 hover:text-pink-500 transition-all"
+          className="text-black font-Roboto text-lg mx-3 hover:text-[#c97064] transition-all"
         >
           Contact
         </Link>
         <Link
           to="/about-us"
-          className="text-black font-Roboto text-lg mx-3 hover:text-pink-500 transition-all"
+          className="text-black font-Roboto text-lg mx-3 hover:text-[#c97064] transition-all"
         >
           About
         </Link>
         <Link
           to="/artwork"
-          className="text-black font-Roboto text-lg mx-3 hover:text-pink-500 transition-all"
+          className="text-black font-Roboto text-lg mx-3 hover:text-[#c97064] transition-all"
         >
           Artworks
         </Link>
         <Link
           to="/dashboard"
-          className="text-black font-Roboto text-lg mx-3 hover:text-pink-500 transition-all"
+          className="text-black font-Roboto text-lg mx-3 hover:text-[#c97064] transition-all"
         >
           Auctions
         </Link>
         <Link
           to="/viewroom"
-          className="text-black font-Roboto text-lg mx-3 hover:text-pink-500 transition-all"
+          className="text-black font-Roboto text-lg mx-3 hover:text-[#c97064] transition-all"
         >
           Viewing Rooms
         </Link>
         <Link
           to="/events"
-          className="text-black font-Roboto text-lg mx-3 hover:text-pink-500 transition-all"
+          className="text-black font-Roboto text-lg mx-3 hover:text-[#c97064] transition-all"
         >
           Fairs & Events
         </Link>
@@ -120,7 +120,7 @@ const Header = () => {
               to="/user-profile/cart"
               className="text-black font-Roboto text-lg mx-3"
             >
-              <BsCart3 className="text-black  hover:text-pink-500  transition-all " />
+              <BsCart3 className="text-black  hover:text-[#c97064]  transition-all " />
             </Link>
             <img
               src={user?.profilePicture}
@@ -152,7 +152,7 @@ const Header = () => {
           <>
             <Link
               to="/login"
-              className="bg-black text-white px-5 py-2 rounded-md hover:bg-gray-400 transition-all duration-150 text-md font-semibold"
+              className="bg-black text-white px-5 py-2 rounded-md hover:bg-[#c97064] hover:text-black transition-all duration-150 text-md font-semibold"
             >
               Sign In
             </Link>

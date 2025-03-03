@@ -97,13 +97,13 @@ const Login = () => {
           </div>
           <Link
             to="/forgot-password"
-            className="my-1 text-black no-underline hover:text-pink-500"
+            className="my-1 text-black no-underline hover:text-[#c97064]"
           >
             Forget Password?
           </Link>
           <button
             type="submit"
-            className="my-4 font-Roboto outline-none border-none w-full rounded bg-black px-4 py-3 font-bold hover:bg-pink-500 hover:text-black text-white"
+            className="my-4 font-Roboto outline-none border-none w-full rounded bg-black px-4 py-3 font-bold hover:bg-[#c97064] hover:text-black text-white"
           >
             Sign In
           </button>
@@ -113,7 +113,7 @@ const Login = () => {
           Don't have an account?{" "}
           <Link
             to="/register"
-            className="font-bold text-blue-600 hover:text-pink-500"
+            className="font-bold text-black hover:text-[#c97064]"
           >
             Sign Up.
           </Link>

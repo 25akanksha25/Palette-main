@@ -116,7 +116,7 @@ const Editorial = () => {
                 <p className="text-gray-600 mt-3">{article.excerpt}</p>
                 <button
                   onClick={() => handleReadMore(article)}
-                  className="text-pink-600 hover:underline mt-4 inline-block text-lg"
+                  className="text-[#c97064] hover:underline mt-4 inline-block text-lg"
                 >
                   Read More
                 </button>
@@ -144,7 +144,7 @@ const Editorial = () => {
                 <p className="text-gray-700 text-medium mt-2">{article.excerpt}</p>
                 <button
                   onClick={() => handleReadMore(article)}
-                  className="text-pink-600 hover:underline mt-4 inline-block"
+                  className="text-[#c97064] hover:underline mt-4 inline-block"
                 >
                   Read More
                 </button>
@@ -161,7 +161,7 @@ const Editorial = () => {
             {/* Close Button */}
             <button
               onClick={handleCloseModal}
-              className="absolute top-4 right-4 text-black hover:text-pink-600"
+              className="absolute top-4 right-4 text-black hover:text-[#c97064]"
             >
               <FontAwesomeIcon icon={faTimes} size="lg" />
             </button>

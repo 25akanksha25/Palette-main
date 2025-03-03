@@ -138,7 +138,7 @@ const Register = () => {
           </div>
           <button
             type="submit"
-            className="my-4 font-Roboto outline-none border-none w-full rounded bg-black px-4 py-3 font-bold hover:bg-pink-500 hover:text-black text-white"
+            className="my-4 font-Roboto outline-none border-none w-full rounded bg-black px-4 py-3 font-bold hover:bg-[#c97064] hover:text-black text-white"
             disabled={isLoading}
           >
             Sign Up
@@ -149,7 +149,7 @@ const Register = () => {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="font-bold text-blue-600 hover:text-pink-500"
+            className="font-bold text-black hover:text-[#c97064]"
           >
             Sign In.
           </Link>

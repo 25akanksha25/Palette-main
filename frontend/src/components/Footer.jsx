@@ -24,7 +24,7 @@ const Footer = () => {
             <li>
               <Link
                 to="/about-us"
-                className="me-4 md:me-6 text-black no-underline hover:text-theme-color"
+                className="me-4 md:me-6 text-black no-underline hover:text-[#c97064]"
               >
                 About Us
               </Link>
@@ -32,7 +32,7 @@ const Footer = () => {
             <li>
               <Link
                 to="/privacy-policy"
-                className="me-4 md:me-6 text-black no-underline hover:text-theme-color"
+                className="me-4 md:me-6 text-black no-underline hover:text-[#c97064]"
               >
                 Privacy Policy
               </Link>
@@ -40,7 +40,7 @@ const Footer = () => {
             <li>
               <Link
                 to="/contact-us"
-                className="text-black no-underline hover:text-theme-color"
+                className="text-black no-underline hover:text-[#c97064]"
               >
                 Contact Us
               </Link>
@@ -51,8 +51,8 @@ const Footer = () => {
         <div className="font-Roboto flex justify-center text-black items-center text-sm sm:text-center">
           © {new Date().getFullYear()}
           <Link to="/" className="ml-1 no-underline">
-            <p className="text-sm font-bold text-theme-color font-Roboto">
-              <span className="uppercase text-theme-color">Palette</span>
+            <p className="text-sm font-bold text-[#c97064] font-Roboto">
+              <span className="uppercase text-[#c97064]">Palette</span>
             </p>
           </Link>
           . All Rights Reserved.
