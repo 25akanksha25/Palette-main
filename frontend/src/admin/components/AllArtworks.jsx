@@ -127,12 +127,24 @@ const AllArtworks = () => {
     () =>
       Array.isArray(artwork)
         ? artwork.map((art) => {
-            const paymentStatus = art?.paid === false ? "UnPaid" : "Paid";
+            // If the artwork is sold, set payment status to "Paid"
+            const paymentStatus =
+              art?.status === "sold" || art?.paid === true ? "Paid" : "UnPaid";
+  
+            // Define payment status classes based on payment status
+            const paymentStatusClass =
+              paymentStatus === "Paid"
+                ? "text-green-600 px-2 py-1 border border-green-600 rounded-full"
+                : "text-red-600 px-2 py-1 border border-red-600 rounded-full";
+  
+            // Define artwork status class (based on availability)
             const statusClass =
-              art?.paid === false
-                ? "text-red-600 px-2 py-1 border border-red-600 rounded-full "
-                : " text-color-success px-2 py-1 border border-color-success  rounded-full";
-
+              art?.status === "available"
+                ? "text-orange-600 px-2 py-1 border border-orange-600 rounded-full"
+                : art?.status === "sold"
+                ? "text-green-700 px-2 py-1 border border-green-700 rounded-full"
+                : "";
+  
             return {
               picture: art?.image,
               name: art?.name,
@@ -142,6 +154,7 @@ const AllArtworks = () => {
               status: art?.status,
               price: art?.price,
               paymentStatus: paymentStatus,
+              paymentStatusClass: paymentStatusClass, // Add payment status class
               statusClass: statusClass,
               actions: art?._id,
             };
@@ -149,6 +162,8 @@ const AllArtworks = () => {
         : [],
     [artwork]
   );
+  
+  
 
   const {
     getTableProps,
