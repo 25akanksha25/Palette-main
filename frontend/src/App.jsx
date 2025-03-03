@@ -31,6 +31,7 @@ import EventPage from "./pages/EventPage";
 // =======
 import UploadArtwork from "./pages/UploadArtwork";
 import SingleArtworkDetail from "./pages/SingleArtworkDetail";
+import SingleEventDetail from "./pages/SingleEventDetail";
 
 import UploadEvent from "./pages/UploadEvent";
 
@@ -62,6 +63,10 @@ console.log(user,"...")
           <Route 
             path="/single-artwork-detail/:id" 
             element={<SingleArtworkDetail />} 
+          />
+          <Route 
+            path="/single-event-detail/:id" 
+            element={<SingleEventDetail />} 
           />
 
 
