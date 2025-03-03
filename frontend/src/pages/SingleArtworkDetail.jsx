@@ -141,7 +141,7 @@ const SingleArtworkDetail = () => {
             artwork.status === "available" ? (
               <button
                 onClick={handlePayment}
-                className="mt-6 bg-black text-white py-2 px-6 rounded-lg text-lg hover:bg-pink-500 w-full"
+                className="mt-6 bg-black text-white py-2 px-6 rounded-lg text-lg hover:bg-[#c97064] w-full"
               >
                 Purchase
               </button>
@@ -152,7 +152,7 @@ const SingleArtworkDetail = () => {
             ) : null
           ) : (
             <Link to="/login">
-              <button className="mt-6 bg-black text-white py-3 px-6 rounded-lg text-lg hover:bg-pink-500 w-full">
+              <button className="mt-6 bg-black text-white py-3 px-6 rounded-lg text-lg hover:bg-[#c97064] w-full">
                 Login to Purchase
               </button>
             </Link>

@@ -39,9 +39,9 @@ const Sidebar = () => {
         <ul className="flex flex-col gap-1 font-medium cursor-pointer text-black">
           <li>
             <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-[#c97064] transition-all duration-500 ${
                 activeLink === "/user-profile/profile"
-                  ? "bg-pink-400 hover:text-white"
+                  ? "bg-[#c97064] hover:text-white"
                   : ""
               }`}
               to="/user-profile/profile"
@@ -62,9 +62,9 @@ const Sidebar = () => {
             <>
               <li>
                 <Link
-                  className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
+                  className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-[#c97064] transition-all duration-500 ${
                     activeLink === "/user-profile/manage-items"
-                      ? "bg-pink-400 hover:text-white"
+                      ? "bg-[#c97064] hover:text-white"
                       : ""
                   }`}
                   to="/user-profile/manage-items"
@@ -84,7 +84,7 @@ const Sidebar = () => {
               </li>
               <li>
                 <Link
-                  className="flex items-center gap-2  py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500"
+                  className="flex items-center gap-2  py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-[#c97064] transition-all duration-500"
                   to="/create-auction"
                 >
                   {/* <FaCirclePlus size={16} className="text-theme-color" /> */}
@@ -96,9 +96,9 @@ const Sidebar = () => {
           )}
           <li>
             <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-[#c97064] transition-all duration-500 ${
                 activeLink === "/user-profile/bids-items"
-                  ? "bg-pink-400 hover:text-white"
+                  ? "bg-[#c97064] hover:text-white"
                   : ""
               }`}
               to="/user-profile/bids-items"
@@ -116,9 +116,9 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-[#c97064] transition-all duration-500 ${
                 activeLink === "/user-profile/notifications"
-                  ? "bg-pink-400 hover:text-white"
+                  ? "bg-[#c97064] hover:text-white"
                   : ""
               }`}
               to="/user-profile/notifications"
@@ -138,9 +138,9 @@ const Sidebar = () => {
           </li>
           {/* <li>
             <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-[#c97064] transition-all duration-500 ${
                 activeLink === "/user-profile/account-settings"
-                  ? "bg-pink-400 hover:text-white"
+                  ? "bg-[#c97064] hover:text-white"
                   : ""
               }`}
               to="/user-profile/account-settings"
@@ -160,9 +160,9 @@ const Sidebar = () => {
           </li> */}
           <li>
             <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-[#c97064] transition-all duration-500 ${
                 activeLink === "/user-profile/change-password"
-                  ? "bg-pink-400 hover:text-white"
+                  ? "bg-[#c97064] hover:text-white"
                   : ""
               }`}
               to="/user-profile/change-password"
@@ -182,9 +182,9 @@ const Sidebar = () => {
           </li>
           {/* <li>
             <Link
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500 ${
+              className={`flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-[#c97064] transition-all duration-500 ${
                 activeLink === "/user-profile/payment-method"
-                  ? "bg-pink-400 hover:text-white"
+                  ? "bg-[#c97064] hover:text-white"
                   : ""
               }`}
               to="/user-profile/payment-method"
@@ -204,7 +204,7 @@ const Sidebar = () => {
           </li> */}
           <li>
             <Link
-              className="flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-pink-400 transition-all duration-500"
+              className="flex items-center gap-2 py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-[#c97064] transition-all duration-500"
               onClick={() => {
                 logoutHandle();
               }}
