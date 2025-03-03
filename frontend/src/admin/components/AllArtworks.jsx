@@ -285,7 +285,7 @@ const AllArtworks = () => {
         <div className="flex flex-col md:flex-row justify-center gap-4 my-4 items-center md:button:px-4 md:button:py-2 button:px-2 button:py-1 button:rounded-lg  ">
           <div className="flex justify-center items-center gap-4">
             <button
-              className={`bg-[#c97064] text-white transition-all ${
+              className={`bg-[#00A3FF] text-white transition-all ${
                 pageIndex === 0 ? "bg-black" : ""
               }`}
               onClick={() => gotoPage(0)}
@@ -296,7 +296,7 @@ const AllArtworks = () => {
             <button
               onClick={() => previousPage()}
               disabled={!canPreviousPage}
-              className={`bg-[#c97064] text-white transition-all ${
+              className={`bg-[#00A3FF] text-white transition-all ${
                 !canPreviousPage ? "bg-black" : ""
               }`}
             >
@@ -312,14 +312,14 @@ const AllArtworks = () => {
             <button
               onClick={() => nextPage()}
               disabled={!canNextPage}
-              className={`bg-[#c97064] text-white transition-all ${
+              className={`bg-[#00A3FF] text-white transition-all ${
                 !canNextPage ? "bg-black" : ""
               }`}
             >
               <FaCaretRight size={18} />
             </button>
             <button
-              className={`bg-[#c97064] text-white transition-all ${
+              className={`bg-[#00A3FF] text-white transition-all ${
                 pageIndex === pageCount - 1
                   ? "bg-black"
                   : ""
