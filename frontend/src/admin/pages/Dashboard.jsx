@@ -10,8 +10,10 @@ import EditCategory from "../components/EditCategory";
 import CreateCategory from "../components/CreateCategory";
 import SingleAuctionDetail from "../../pages/SingleAuctionDetail"
 import AllArtworks from "../components/AllArtworks";
+import AllEvents from "../components/AllEvents";
 // import ArtworkDetails from "../../pages/ArtWorkDetails";
 import SingleArtworkDetail from "../../pages/SingleArtworkDetail";
+import SingleEventDetail from "../../pages/SingleEventDetail";
 
 const Dashboard = () => {
   return (
@@ -26,8 +28,10 @@ const Dashboard = () => {
             <Route path="/users/edit/:id" element={<EditUser />} />
             <Route path="/auctions/*" element={<AllAuctions />} />
             <Route path="/artworks/*" element={<AllArtworks />} />
+            <Route path="/event/*" element={<AllEvents />} />
             <Route path="/auctions/view/:id" element={<SingleAuctionDetail noPadding />} />
             <Route path="/artwork/view/:id" element={<SingleArtworkDetail noPadding/>} />
+            <Route path="/event/view/:id" element={<SingleEventDetail noPadding/>} />
             <Route path="/categories/*" element={<AllCategories />} />
             <Route path="/categories/edit/:id" element={<EditCategory />} />
             <Route

@@ -119,6 +119,25 @@ const Sidebar = ({ closeNavbar }) => {
               Artworks
             </Link>
           </li>
+          <li>
+            <Link
+              className={`flex items-center gap-2  py-2 px-4 rounded-lg cursor-pointer hover:pl-[20px] hover:text-white hover:bg-gray-500 transition-all duration-500 ${
+                activeLink === "/admin/event"
+                  ? "bg-gray-400"
+                  : "text-black"
+              }`}
+              to="/admin/event"
+              onClick={() => handleLinkClick("/admin/event")}
+            >
+              <FaPaintBrush
+                size={16}
+                className={`text-black transition-all duration-500 ${
+                  activeLink === "/admin/event" ? " text-black" : ""
+                }`}
+              />
+              Events
+            </Link>
+          </li>
 
           <li>
             <Link
