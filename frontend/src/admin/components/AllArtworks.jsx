@@ -127,12 +127,24 @@ const AllArtworks = () => {
     () =>
       Array.isArray(artwork)
         ? artwork.map((art) => {
-            const paymentStatus = art?.paid === false ? "UnPaid" : "Paid";
+            // If the artwork is sold, set payment status to "Paid"
+            const paymentStatus =
+              art?.status === "sold" || art?.paid === true ? "Paid" : "UnPaid";
+  
+            // Define payment status classes based on payment status
+            const paymentStatusClass =
+              paymentStatus === "Paid"
+                ? "text-green-600 px-2 py-1 border border-green-600 rounded-full"
+                : "text-red-600 px-2 py-1 border border-red-600 rounded-full";
+  
+            // Define artwork status class (based on availability)
             const statusClass =
-              art?.paid === false
-                ? "text-red-600 px-2 py-1 border border-red-600 rounded-full "
-                : " text-color-success px-2 py-1 border border-color-success  rounded-full";
-
+              art?.status === "available"
+                ? "text-orange-600 px-2 py-1 border border-orange-600 rounded-full"
+                : art?.status === "sold"
+                ? "text-green-700 px-2 py-1 border border-green-700 rounded-full"
+                : "";
+  
             return {
               picture: art?.image,
               name: art?.name,
@@ -142,6 +154,7 @@ const AllArtworks = () => {
               status: art?.status,
               price: art?.price,
               paymentStatus: paymentStatus,
+              paymentStatusClass: paymentStatusClass, // Add payment status class
               statusClass: statusClass,
               actions: art?._id,
             };
@@ -149,6 +162,8 @@ const AllArtworks = () => {
         : [],
     [artwork]
   );
+  
+  
 
   const {
     getTableProps,
@@ -270,7 +285,7 @@ const AllArtworks = () => {
         <div className="flex flex-col md:flex-row justify-center gap-4 my-4 items-center md:button:px-4 md:button:py-2 button:px-2 button:py-1 button:rounded-lg  ">
           <div className="flex justify-center items-center gap-4">
             <button
-              className={`bg-[#c97064] text-white transition-all ${
+              className={`bg-[#00A3FF] text-white transition-all ${
                 pageIndex === 0 ? "bg-black" : ""
               }`}
               onClick={() => gotoPage(0)}
@@ -281,7 +296,7 @@ const AllArtworks = () => {
             <button
               onClick={() => previousPage()}
               disabled={!canPreviousPage}
-              className={`bg-[#c97064] text-white transition-all ${
+              className={`bg-[#00A3FF] text-white transition-all ${
                 !canPreviousPage ? "bg-black" : ""
               }`}
             >
@@ -297,14 +312,14 @@ const AllArtworks = () => {
             <button
               onClick={() => nextPage()}
               disabled={!canNextPage}
-              className={`bg-[#c97064] text-white transition-all ${
+              className={`bg-[#00A3FF] text-white transition-all ${
                 !canNextPage ? "bg-black" : ""
               }`}
             >
               <FaCaretRight size={18} />
             </button>
             <button
-              className={`bg-[#c97064] text-white transition-all ${
+              className={`bg-[#00A3FF] text-white transition-all ${
                 pageIndex === pageCount - 1
                   ? "bg-black"
                   : ""
