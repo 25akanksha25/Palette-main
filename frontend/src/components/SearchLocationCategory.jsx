@@ -72,7 +72,7 @@ const SearchLocationCategory = () => {
 
   return (
     <div className="flex justify-center items-center my-5 min-h-[100px] mt-16">
-      <div className="flex flex-wrap justify-center items-center gap-12 bg-white text-black p-4 w-[90%] mb-8">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-6 bg-white text-black p-4 w-full mb-8">
         <select
           required
           id="location"
