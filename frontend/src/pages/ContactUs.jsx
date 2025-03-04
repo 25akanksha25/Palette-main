@@ -15,7 +15,7 @@ const ContactUs = () => {
     const formObject = Object.fromEntries(formData.entries());
 
     try {
-      await axios.post("http://localhost:8000/contact/send-email", formObject);
+      await axios.post("http://localhost:8010/contact/send-email", formObject);
       toast.success("Email sent successfully.", { autoClose: 1000 });
       form.current.reset();
     } catch (error) {
