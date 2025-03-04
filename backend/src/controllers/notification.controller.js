@@ -147,21 +147,114 @@ import Bid from "../models/bid.model.js";
 // });
 
 
+
+
+
+
+// const sendNotification = asyncHandler(async (req, res) => {
+//   const { auctionId, type, newBidAmount } = req.body;
+
+//   if (!auctionId || !type || (type === "BID_PLACED" && !newBidAmount)) {
+//     return res
+//       .status(400)
+//       .json(new ApiResponse(400, "Auction ID, type, and new bid amount are required"));
+//   }
+
+//   const auction = await Auction.findById(auctionId);
+//   if (!auction) {
+//     return res.status(404).json(new ApiResponse(404, "Auction not found"));
+//   }
+
+//   let notification;
+
+//   if (type === "BID_PLACED") {
+//     notification = {
+//       user: null,
+//       message: `${req?.user?.fullName} has placed a ${newBidAmount}₹ bid on ${auction?.name}`,
+//       type: "BID_PLACED",
+//       auction: auctionId,
+//       link: `/single-auction-detail/${auctionId}`,
+//     };
+//   }
+
+//   if (type === "AUCTION_WON") {
+//     // Find the highest bid
+//     let winnerBid = await Bid.findOne({ auction: auctionId })
+//       .sort({ bidAmount: -1 }) // Sort bids in descending order
+//       .populate("bidder");
+
+//     if (!winnerBid) {
+//       return res.status(404).json(new ApiResponse(404, "No valid bids found"));
+//     }
+
+//     const winnerUser = winnerBid.bidder;
+
+//     // Update auction with new winner
+//     await Auction.findByIdAndUpdate(auctionId, { winner: winnerBid._id });
+
+//     notification = {
+//       user: winnerUser._id,
+//       message: `Congratulations! You won the auction for ${auction?.name} with a bid of ${winnerBid.bidAmount}₹`,
+//       type: "AUCTION_WON",
+//       auction: auctionId,
+//       link: `/single-auction-detail/${auctionId}`,
+//     };
+
+//     await new Notification(notification).save();
+
+//     // Notify other bidders who lost
+//     const otherBidders = await Bid.find({ auction: auctionId, _id: { $ne: winnerBid._id } }).populate("bidder");
+
+//     otherBidders.forEach(async (bid) => {
+//       await new Notification({
+//         user: bid.bidder._id,
+//         message: `You lost the auction for ${auction?.name}. The winning bid was ${winnerBid.bidAmount}₹`,
+//         type: "AUCTION_LOST",
+//         auction: auctionId,
+//         link: `/single-auction-detail/${auctionId}`,
+//       }).save();
+//     });
+//   }
+
+//   try {
+//     const bids = await Bid.find({ auction: auctionId });
+//     const userIds = new Set(bids.map((bid) => bid.bidder.toString()));
+//     userIds.add(auction.seller.toString());
+
+//     userIds.forEach(async (id) => {
+//       await new Notification({
+//         ...notification,
+//         user: id,
+//         message: `${
+//           id === req?.user?._id.toString() ? "You" : req?.user?.fullName
+//         } placed a ${newBidAmount}₹ bid on ${auction?.name}`,
+//       }).save();
+//     });
+
+//     return res.status(200).json(new ApiResponse(200, "Notification sent successfully"));
+//   } catch (error) {
+//     return res.status(500).json(new ApiResponse(500, error?.message || "Internal server error"));
+//   }
+// });
+
+
+
+
 const sendNotification = asyncHandler(async (req, res) => {
   const { auctionId, type, newBidAmount } = req.body;
 
-  if (!auctionId || !type || (type === "BID_PLACED" && !newBidAmount)) {
+  if (!auctionId || !type || !newBidAmount) {
     return res
       .status(400)
       .json(new ApiResponse(400, "Auction ID, type, and new bid amount are required"));
   }
 
-  const auction = await Auction.findById(auctionId);
+  let auction = await Auction.findById(auctionId);
   if (!auction) {
     return res.status(404).json(new ApiResponse(404, "Auction not found"));
   }
 
-  let notification;
+  let notification = {};
 
   if (type === "BID_PLACED") {
     notification = {
@@ -174,41 +267,32 @@ const sendNotification = asyncHandler(async (req, res) => {
   }
 
   if (type === "AUCTION_WON") {
-    // Find the highest bid
-    let winnerBid = await Bid.findOne({ auction: auctionId })
-      .sort({ bidAmount: -1 }) // Sort bids in descending order
-      .populate("bidder");
+    const winnerBid = await Bid.findById(auction.winner);
+    const winnerUser = winnerBid ? await winnerBid.populate("bidder") : null;
 
-    if (!winnerBid) {
-      return res.status(404).json(new ApiResponse(404, "No valid bids found"));
-    }
-
-    const winnerUser = winnerBid.bidder;
-
-    // Update auction with new winner
-    await Auction.findByIdAndUpdate(auctionId, { winner: winnerBid._id });
-
-    notification = {
-      user: winnerUser._id,
-      message: `Congratulations! You won the auction for ${auction?.name} with a bid of ${winnerBid.bidAmount}₹`,
-      type: "AUCTION_WON",
-      auction: auctionId,
-      link: `/single-auction-detail/${auctionId}`,
-    };
-
-    await new Notification(notification).save();
-
-    // Notify other bidders who lost
-    const otherBidders = await Bid.find({ auction: auctionId, _id: { $ne: winnerBid._id } }).populate("bidder");
-
-    otherBidders.forEach(async (bid) => {
-      await new Notification({
-        user: bid.bidder._id,
-        message: `You lost the auction for ${auction?.name}. The winning bid was ${winnerBid.bidAmount}₹`,
-        type: "AUCTION_LOST",
+    if (winnerUser) {
+      notification = {
+        user: winnerUser.bidder._id,
+        message: `Congratulations! You have won the auction for ${auction?.name} with a bid of ${winnerBid.bidAmount}`,
+        type: "AUCTION_WON",
         auction: auctionId,
         link: `/single-auction-detail/${auctionId}`,
-      }).save();
+      };
+      await new Notification(notification).save();
+    }
+
+    const otherBidders = await Bid.find({ auction: auctionId }).populate("bidder");
+    otherBidders.forEach(async (bid) => {
+      if (bid.bidder._id.toString() !== winnerUser?.bidder._id.toString()) {
+        notification = {
+          user: bid.bidder._id,
+          message: `You lost the auction for ${auction?.name}. The winning bid was ${winnerBid.bidAmount}`,
+          type: "AUCTION_LOST",
+          auction: auctionId,
+          link: `/single-auction-detail/${auctionId}`,
+        };
+        await new Notification(notification).save();
+      }
     });
   }
 
@@ -218,13 +302,11 @@ const sendNotification = asyncHandler(async (req, res) => {
     userIds.add(auction.seller.toString());
 
     userIds.forEach(async (id) => {
-      await new Notification({
-        ...notification,
-        user: id,
-        message: `${
-          id === req?.user?._id.toString() ? "You" : req?.user?.fullName
-        } placed a ${newBidAmount}₹ bid on ${auction?.name}`,
-      }).save();
+      notification.message = `${
+        id === req?.user?._id.toString() ? "You" : req?.user?.fullName
+      } placed a ${newBidAmount}₹ bid on ${auction?.name}`;
+
+      await new Notification({ ...notification, user: id }).save();
     });
 
     return res.status(200).json(new ApiResponse(200, "Notification sent successfully"));
@@ -232,6 +314,13 @@ const sendNotification = asyncHandler(async (req, res) => {
     return res.status(500).json(new ApiResponse(500, error?.message || "Internal server error"));
   }
 });
+
+
+
+
+
+
+
 
 
 
