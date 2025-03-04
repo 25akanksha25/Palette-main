@@ -10,7 +10,7 @@ import {SellerRoutes} from '../auth/Protected'
 // import PaymentMethod from "../components/PaymentMethod";
 import Cart from "../components/Cart";
 import ErrorPage from "./ErrorPage";
-import banner from "../assets/profileBanner1.jfif"
+import banner from "../assets/profileBanner2.png"
 
 
 
@@ -18,7 +18,7 @@ const UserProfile = () => {
   return (
     <div className="">
       {/* Banner Section */}
-      <div className="relative h-[280px] w-full">
+      <div className="relative h-[300px] w-full">
         <img
           src={banner} // Replace with the actual path to your banner image
           alt="Profile Banner"

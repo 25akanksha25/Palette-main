@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllArtworks } from "../store/artwork/artworkSlice";
 import { toast } from "react-toastify"; // Import toast for error handling
-import backgroundImg from "../assets/artwork_header.gif";
+import backgroundImg from "../assets/artwork_header2.png";
 
 const ArtWorks = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const ArtWorks = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center">
-        <div className="relative w-full h-[600px]">
+        <div className="relative w-full h-[350px]">
           <img
             src={backgroundImg}
             alt="Artwork Background"
