@@ -14,6 +14,7 @@ import { IoLogOutSharp, IoWalletOutline } from "react-icons/io5";
 import { BiSolidCategory } from "react-icons/bi";
 import { RiAuctionFill } from "react-icons/ri";
 import { FaPaintBrush } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
 
 
 const Sidebar = ({ closeNavbar }) => {
@@ -129,7 +130,7 @@ const Sidebar = ({ closeNavbar }) => {
               to="/admin/event"
               onClick={() => handleLinkClick("/admin/event")}
             >
-              <FaPaintBrush
+              <FaCalendarAlt
                 size={16}
                 className={`text-black transition-all duration-500 ${
                   activeLink === "/admin/event" ? " text-black" : ""
