@@ -152,7 +152,7 @@ import Bid from "../models/bid.model.js";
 
 
 // const sendNotification = asyncHandler(async (req, res) => {
-//   const { auctionId, type, newBidAmount } = req.body;
+//   const { auctionId, type, newBidAm  ount } = req.body;
 
 //   if (!auctionId || !type || (type === "BID_PLACED" && !newBidAmount)) {
 //     return res
