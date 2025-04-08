@@ -18,16 +18,16 @@ const UserProfile = () => {
   return (
     <div className="">
       {/* Banner Section */}
-      <div className="relative h-[300px] w-full">
+      {/* <div className="relative h-[300px] w-full">
         <img
           src={banner} // Replace with the actual path to your banner image
           alt="Profile Banner"
           className="w-full h-full object-cover"
         />
-      </div>
+      </div> */}
 
       {/* Rest of the Profile Page */}
-      <div className="flex gap-4 px-5 py-10 flex-wrap lg:flex-nowrap ">
+      <div className="flex gap-4 px-5 py-10 flex-wrap lg:flex-nowrap bg-[rgba(201,112,100,0.1)]">
         <Sidebar />
         <Routes>
           <Route path="/profile" element={<ProfileComponent />} />
