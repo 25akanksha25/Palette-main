@@ -66,7 +66,7 @@ const Notifications = () => {
   //console.log(notificationData, " notificationsData........");
 
   return (
-    <div className="overflow-auto flex flex-col w-full px-7 py-4 bg-gray-300 text-body-text-color border border-gray-600 rounded-2xl ">
+    <div className="overflow-auto flex flex-col w-full px-7 py-4 bg-gray-100 text-body-text-color border border-gray-600 rounded-2xl ">
       <h2 className=" text-black font-bold text-3xl border-b border-border-info-color pb-3 mb-5 ">
         Notifications
       </h2>

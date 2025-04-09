@@ -35,11 +35,11 @@ const BidsItem = () => {
   }
 
   return (
-    <div className="overflow-auto px-7 py-4 w-full bg-gray-300 text-black rounded-2xl border border-black">
+    <div className="overflow-auto px-7 py-4 w-full bg-gray-100 text-black rounded-2xl border border-black">
       <h2 className="  text-black font-bold text-3xl border-b border-gray-700 border-border-black pb-3 mb-5 ">
         Bids Items
       </h2>
-      <div className="overflow-auto no-scrollbar px-4 bg-gray-400 border border-black rounded-2xl  max-h-[750px]">
+      <div className="overflow-auto no-scrollbar px-4 bg-gray-200 border border-black rounded-2xl  max-h-[750px]">
       <table className="relative text-left whitespace-nowrap w-full border-separate border-spacing-x-0 border-spacing-y-4">
     <thead className="sticky top-0 rounded-lg bg-gray-300">
       <tr className="[&_th]:pl-5 [&_th]:pr-3 [&_th]:py-3">

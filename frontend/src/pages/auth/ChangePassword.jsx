@@ -48,7 +48,7 @@ const {isLoading,isSuccess , isError,message}=useSelector((state)=>state.auth)
   };
 
   return (
-    <div className="flex flex-col w-full px-7 py-4 bg-gray-200 text-black rounded-2xl ">
+    <div className="flex flex-col w-full px-7 py-4 bg-gray-200 text-black rounded-2xl border border-gray-800">
       <h2 className=" text-black font-bold text-2xl border-b border-gray-600 pb-3 mb-5 ">
         Change Password
       </h2>
