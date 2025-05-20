@@ -1,5 +1,4 @@
 export const credentials = {
-    user1: 'akriti1220.be22@chitkara.edu.in',
-    pass1: 'Akriti@mail1220'
-  };
-  
+    user1: 'hotlineclasher123@gmail.com',
+    pass1: 'xkth vzsg dnun ohll'
+};
